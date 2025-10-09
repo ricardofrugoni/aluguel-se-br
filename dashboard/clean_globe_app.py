@@ -127,7 +127,7 @@ def load_airbnb_data():
     
     return pd.DataFrame(data)
 
-def create_globe_map(df, selected_city=None, selected_neighborhood=None):
+def create_globe_map(df, selected_city=None, selected_neighborhood=None, map_style="open-street-map", zoom_level=7, marker_size=8):
     """
     Cria um globo interativo focado em SP e RJ
     """
@@ -149,11 +149,12 @@ def create_globe_map(df, selected_city=None, selected_neighborhood=None):
             lon=city_data['longitude'],
             mode='markers',
             marker=dict(
-                size=8,
+                size=marker_size,
                 color=city_data['price'],
                 colorscale='Viridis',
                 showscale=True,
-                colorbar=dict(title="Preço (R$)")
+                colorbar=dict(title="Preço (R$)", x=1.02),
+                opacity=0.8
             ),
             text=city_data.apply(lambda x: f"""
             <b>{x['neighborhood']}, {x['city']}</b><br>
@@ -169,13 +170,16 @@ def create_globe_map(df, selected_city=None, selected_neighborhood=None):
     # Configurar o layout do mapa
     fig.update_layout(
         mapbox=dict(
-            style="open-street-map",
+            style=map_style,
             center=dict(lat=-23.5, lon=-45),  # Centro entre SP e RJ
-            zoom=6
+            zoom=zoom_level,
+            bearing=0,
+            pitch=0
         ),
         title=f"🏠 Airbnb - {selected_city if selected_city else 'SP & RJ'}",
-        height=600,
-        showlegend=True
+        height=800,  # Aumentar altura do mapa
+        showlegend=True,
+        margin=dict(l=0, r=0, t=50, b=0)  # Reduzir margens para maximizar o mapa
     )
     
     return fig
@@ -225,6 +229,21 @@ def main():
     
     selected_neighborhood = st.sidebar.selectbox("🏘️ Bairro", neighborhoods)
     
+    # Controles do mapa
+    st.sidebar.markdown("## 🗺️ Controles do Mapa")
+    
+    # Estilo do mapa
+    map_style = st.sidebar.selectbox(
+        "🎨 Estilo do Mapa",
+        ["open-street-map", "carto-positron", "carto-darkmatter", "stamen-terrain", "stamen-toner"]
+    )
+    
+    # Nível de zoom
+    zoom_level = st.sidebar.slider("🔍 Nível de Zoom", min_value=5, max_value=15, value=7)
+    
+    # Tamanho dos pontos
+    marker_size = st.sidebar.slider("📍 Tamanho dos Pontos", min_value=5, max_value=20, value=8)
+    
     # Aplicar filtros
     filtered_df = df.copy()
     if selected_city != 'Todos':
@@ -268,9 +287,26 @@ def main():
     
     # Mapa interativo
     st.markdown("## 🗺️ Mapa Interativo")
-    fig = create_globe_map(filtered_df, selected_city if selected_city != 'Todos' else None, 
-                          selected_neighborhood if selected_neighborhood != 'Todos' else None)
+    st.markdown("**💡 Dica**: Use o mouse para fazer zoom e navegar pelo mapa")
+    
+    fig = create_globe_map(
+        filtered_df, 
+        selected_city if selected_city != 'Todos' else None, 
+        selected_neighborhood if selected_neighborhood != 'Todos' else None,
+        map_style,
+        zoom_level,
+        marker_size
+    )
     st.plotly_chart(fig, use_container_width=True)
+    
+    # Controles de zoom
+    col1, col2, col3 = st.columns(3)
+    with col1:
+        st.markdown("**🔍 Controles de Zoom:**")
+    with col2:
+        st.markdown("• **Scroll**: Zoom in/out")
+    with col3:
+        st.markdown("• **Arrastar**: Navegar pelo mapa")
     
     # Análise de preços por bairro
     st.markdown("## 📊 Análise de Preços por Bairro")
