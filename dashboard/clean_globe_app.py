@@ -168,11 +168,19 @@ def create_globe_map(df, selected_city=None, selected_neighborhood=None, map_sty
             name=city
         ))
     
+    # Determinar centro baseado na cidade selecionada
+    if selected_city == 'São Paulo':
+        center_lat, center_lon = -23.5505, -46.6333
+    elif selected_city == 'Rio de Janeiro':
+        center_lat, center_lon = -22.9068, -43.1729
+    else:
+        center_lat, center_lon = -23.5, -45  # Centro entre SP e RJ
+    
     # Configurar o layout do mapa
     fig.update_layout(
         mapbox=dict(
             style=map_style,
-            center=dict(lat=-23.5, lon=-45),  # Centro entre SP e RJ
+            center=dict(lat=center_lat, lon=center_lon),
             zoom=zoom_level,
             bearing=0,
             pitch=0
@@ -237,24 +245,52 @@ def main():
     # Estilo do mapa
     map_style = st.sidebar.selectbox(
         "🎨 Estilo do Mapa",
-        ["open-street-map", "carto-positron", "carto-darkmatter", "stamen-terrain", "stamen-toner"]
+        ["open-street-map", "carto-positron", "carto-darkmatter", "white-bg", "satellite"]
     )
     
     # Nível de zoom
-    zoom_level = st.sidebar.slider("🔍 Nível de Zoom", min_value=5, max_value=15, value=8)
+    zoom_level = st.sidebar.slider("🔍 Nível de Zoom", min_value=8, max_value=18, value=12)
     
     # Tamanho dos pontos
-    marker_size = st.sidebar.slider("📍 Tamanho dos Pontos", min_value=5, max_value=20, value=10)
+    marker_size = st.sidebar.slider("📍 Tamanho dos Pontos", min_value=8, max_value=25, value=12)
     
     # Botões de zoom rápido
     st.sidebar.markdown("**🔍 Zoom Rápido:**")
     col1, col2 = st.sidebar.columns(2)
     with col1:
         if st.button("🏙️ SP"):
-            zoom_level = 10
+            zoom_level = 13
     with col2:
         if st.button("🏖️ RJ"):
-            zoom_level = 10
+            zoom_level = 13
+    
+    # Zoom para bairros específicos
+    if selected_city == 'São Paulo':
+        st.sidebar.markdown("**🏘️ Bairros SP:**")
+        col1, col2 = st.sidebar.columns(2)
+        with col1:
+            if st.button("Vila Madalena"):
+                zoom_level = 15
+            if st.button("Jardins"):
+                zoom_level = 15
+        with col2:
+            if st.button("Pinheiros"):
+                zoom_level = 15
+            if st.button("Moema"):
+                zoom_level = 15
+    elif selected_city == 'Rio de Janeiro':
+        st.sidebar.markdown("**🏖️ Bairros RJ:**")
+        col1, col2 = st.sidebar.columns(2)
+        with col1:
+            if st.button("Copacabana"):
+                zoom_level = 15
+            if st.button("Ipanema"):
+                zoom_level = 15
+        with col2:
+            if st.button("Leblon"):
+                zoom_level = 15
+            if st.button("Botafogo"):
+                zoom_level = 15
     
     # Aplicar filtros
     filtered_df = df.copy()
