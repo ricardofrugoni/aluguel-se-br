@@ -1,0 +1,83 @@
+{
+  "data_sources": {
+    "airbnb_urls": {
+      "sao_paulo": "http://data.insideairbnb.com/brazil/sp/sao-paulo/2024-01-01/data/listings.csv.gz",
+      "rio_de_janeiro": "http://data.insideairbnb.com/brazil/rj/rio-de-janeiro/2024-01-01/data/listings.csv.gz"
+    }
+  },
+  "poi_types": {
+    "subway": {
+      "amenity": "subway_entrance"
+    },
+    "supermarket": {
+      "shop": "supermarket"
+    },
+    "school": {
+      "amenity": "school"
+    },
+    "hospital": {
+      "amenity": "hospital"
+    },
+    "mall": {
+      "shop": "mall"
+    }
+  },
+  "feature_engineering": {
+    "grid_size": 0.01,
+    "density_radius_km": 1.0,
+    "distance_threshold_km": 10.0
+  },
+  "model_parameters": {
+    "baseline_models": {
+      "ridge": {
+        "alpha": 1.0
+      },
+      "random_forest": {
+        "n_estimators": 100,
+        "random_state": 42
+      }
+    },
+    "advanced_models": {
+      "xgboost": {
+        "n_estimators": 1000,
+        "learning_rate": 0.1,
+        "max_depth": 6,
+        "random_state": 42
+      },
+      "lightgbm": {
+        "n_estimators": 1000,
+        "learning_rate": 0.1,
+        "max_depth": 6,
+        "random_state": 42,
+        "verbose": -1
+      },
+      "catboost": {
+        "iterations": 1000,
+        "learning_rate": 0.1,
+        "depth": 6,
+        "random_seed": 42,
+        "verbose": false
+      }
+    }
+  },
+  "evaluation": {
+    "cv_folds": 5,
+    "test_size": 0.2,
+    "random_state": 42,
+    "metrics": ["mae", "rmse", "r2", "mape", "within_10pct", "within_20pct"]
+  },
+  "paths": {
+    "data_dir": "data",
+    "raw_data_dir": "data/raw",
+    "processed_data_dir": "data/processed",
+    "external_data_dir": "data/external",
+    "models_dir": "models",
+    "reports_dir": "reports",
+    "logs_dir": "logs"
+  },
+  "logging": {
+    "level": "INFO",
+    "format": "%(asctime)s [%(levelname)s] %(name)s: %(message)s",
+    "file": "logs/rental_prediction.log"
+  }
+}
