@@ -161,7 +161,8 @@ def create_globe_map(df, selected_city=None, selected_neighborhood=None, map_sty
             Preço: R$ {x['price']:.0f}/noite<br>
             Tipo: {x['property_type']}<br>
             Quartos: {x['bedrooms']}<br>
-            Avaliação: {x['review_scores_rating']:.1f}/100
+            Avaliação: {x['review_scores_rating']:.1f}/100<br>
+            Reviews: {x['number_of_reviews']}
             """, axis=1),
             hovertemplate='%{text}<extra></extra>',
             name=city
@@ -177,9 +178,10 @@ def create_globe_map(df, selected_city=None, selected_neighborhood=None, map_sty
             pitch=0
         ),
         title=f"🏠 Airbnb - {selected_city if selected_city else 'SP & RJ'}",
-        height=800,  # Aumentar altura do mapa
+        height=900,  # Aumentar ainda mais a altura do mapa
         showlegend=True,
-        margin=dict(l=0, r=0, t=50, b=0)  # Reduzir margens para maximizar o mapa
+        margin=dict(l=0, r=0, t=50, b=0),  # Reduzir margens para maximizar o mapa
+        autosize=True  # Permitir redimensionamento automático
     )
     
     return fig
@@ -239,10 +241,20 @@ def main():
     )
     
     # Nível de zoom
-    zoom_level = st.sidebar.slider("🔍 Nível de Zoom", min_value=5, max_value=15, value=7)
+    zoom_level = st.sidebar.slider("🔍 Nível de Zoom", min_value=5, max_value=15, value=8)
     
     # Tamanho dos pontos
-    marker_size = st.sidebar.slider("📍 Tamanho dos Pontos", min_value=5, max_value=20, value=8)
+    marker_size = st.sidebar.slider("📍 Tamanho dos Pontos", min_value=5, max_value=20, value=10)
+    
+    # Botões de zoom rápido
+    st.sidebar.markdown("**🔍 Zoom Rápido:**")
+    col1, col2 = st.sidebar.columns(2)
+    with col1:
+        if st.button("🏙️ SP"):
+            zoom_level = 10
+    with col2:
+        if st.button("🏖️ RJ"):
+            zoom_level = 10
     
     # Aplicar filtros
     filtered_df = df.copy()
@@ -287,26 +299,39 @@ def main():
     
     # Mapa interativo
     st.markdown("## 🗺️ Mapa Interativo")
-    st.markdown("**💡 Dica**: Use o mouse para fazer zoom e navegar pelo mapa")
+    st.markdown("**💡 Dica**: Use o mouse para fazer zoom e navegar pelo mapa. Clique nos pontos para ver detalhes!")
     
-    fig = create_globe_map(
-        filtered_df, 
-        selected_city if selected_city != 'Todos' else None, 
-        selected_neighborhood if selected_neighborhood != 'Todos' else None,
-        map_style,
-        zoom_level,
-        marker_size
-    )
-    st.plotly_chart(fig, use_container_width=True)
+    # Container para o mapa com altura fixa
+    with st.container():
+        fig = create_globe_map(
+            filtered_df, 
+            selected_city if selected_city != 'Todos' else None, 
+            selected_neighborhood if selected_neighborhood != 'Todos' else None,
+            map_style,
+            zoom_level,
+            marker_size
+        )
+        st.plotly_chart(fig, use_container_width=True, height=900)
     
     # Controles de zoom
-    col1, col2, col3 = st.columns(3)
+    st.markdown("### 🔍 Controles de Navegação")
+    col1, col2, col3, col4 = st.columns(4)
     with col1:
-        st.markdown("**🔍 Controles de Zoom:**")
+        st.markdown("**🖱️ Mouse:**")
+        st.markdown("• Scroll: Zoom")
+        st.markdown("• Arrastar: Mover")
     with col2:
-        st.markdown("• **Scroll**: Zoom in/out")
+        st.markdown("**👆 Toque:**")
+        st.markdown("• Pinch: Zoom")
+        st.markdown("• Arrastar: Mover")
     with col3:
-        st.markdown("• **Arrastar**: Navegar pelo mapa")
+        st.markdown("**⌨️ Teclado:**")
+        st.markdown("• +/-: Zoom")
+        st.markdown("• Setas: Mover")
+    with col4:
+        st.markdown("**🎯 Dicas:**")
+        st.markdown("• Clique nos pontos")
+        st.markdown("• Use filtros laterais")
     
     # Análise de preços por bairro
     st.markdown("## 📊 Análise de Preços por Bairro")
