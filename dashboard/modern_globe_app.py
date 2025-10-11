@@ -109,9 +109,10 @@ st.markdown("""
         box-shadow: 0 8px 25px rgba(0,0,0,0.15);
     }
     
-    /* Containers compactos e cinza claro */
-    .stMetric {
+    /* Containers compactos e cinza claro - FORÇADO */
+    div[data-testid="metric-container"] {
         background: #f8f9fa !important;
+        background-color: #f8f9fa !important;
         border-radius: 4px !important;
         padding: 0.1rem !important;
         margin: 0.05rem !important;
@@ -120,37 +121,38 @@ st.markdown("""
         max-height: 50px !important;
     }
     
-    .stMetric > div {
+    div[data-testid="metric-container"] > div {
+        background: #f8f9fa !important;
+        background-color: #f8f9fa !important;
         padding: 0.1rem !important;
         margin: 0 !important;
         height: 100% !important;
     }
     
-    .stMetric > div > div {
+    div[data-testid="metric-container"] > div > div {
+        background: #f8f9fa !important;
+        background-color: #f8f9fa !important;
         padding: 0 !important;
         margin: 0 !important;
         height: 100% !important;
     }
     
-    .stMetric > div > div > div {
-        padding: 0 !important;
-        margin: 0 !important;
-        height: 100% !important;
-    }
-    
-    /* Forçar fundo cinza em todos os elementos */
-    .stMetric, .stMetric *, .stMetric > div, .stMetric > div > div {
+    /* Forçar fundo cinza em TODOS os elementos */
+    div[data-testid="metric-container"], 
+    div[data-testid="metric-container"] *, 
+    div[data-testid="metric-container"] > div, 
+    div[data-testid="metric-container"] > div > div {
         background: #f8f9fa !important;
         background-color: #f8f9fa !important;
     }
     
     /* Reduzir fonte dos valores */
-    .stMetric [data-testid="metric-value"] {
+    div[data-testid="metric-value"] {
         font-size: 1.2rem !important;
         line-height: 1 !important;
     }
     
-    .stMetric [data-testid="metric-label"] {
+    div[data-testid="metric-label"] {
         font-size: 0.8rem !important;
         line-height: 1 !important;
     }
