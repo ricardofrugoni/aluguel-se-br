@@ -796,47 +796,31 @@ def main():
     if selected_neighborhood != 'Todos':
         filtered_df = filtered_df[filtered_df['neighborhood'] == selected_neighborhood]
     
-    # Métricas principais com design moderno
-    col1, col2, col3, col4 = st.columns(4)
+    # Métricas principais com HTML customizado compacto
+    avg_price = filtered_df['current_price'].mean()
+    high_price_pct = (filtered_df['price_status'] == 'high').mean() * 100
+    low_price_pct = (filtered_df['price_status'] == 'low').mean() * 100
     
-    with col1:
-        st.markdown(f"""
-        <div class="metric-card">
-            <div class="metric-value">🏠</div>
-            <div class="metric-value">{len(filtered_df):,}</div>
-            <div class="metric-label">Propriedades</div>
+    st.markdown(f"""
+    <div style="display: flex; gap: 8px; margin: 5px 0;">
+        <div style="background: #f8f9fa; padding: 8px; border-radius: 4px; flex: 1; text-align: center; min-height: 50px; max-height: 50px;">
+            <div style="font-size: 1.2rem; font-weight: bold; color: #2c3e50;">{len(filtered_df):,}</div>
+            <div style="font-size: 0.8rem; color: #666;">Propriedades</div>
         </div>
-        """, unsafe_allow_html=True)
-    
-    with col2:
-        avg_price = filtered_df['current_price'].mean()
-        st.markdown(f"""
-        <div class="metric-card">
-            <div class="metric-value">💰</div>
-            <div class="metric-value">R$ {avg_price:.0f}</div>
-            <div class="metric-label">Preço Médio</div>
+        <div style="background: #f8f9fa; padding: 8px; border-radius: 4px; flex: 1; text-align: center; min-height: 50px; max-height: 50px;">
+            <div style="font-size: 1.2rem; font-weight: bold; color: #2c3e50;">R$ {avg_price:.0f}</div>
+            <div style="font-size: 0.8rem; color: #666;">Preço Médio</div>
         </div>
-        """, unsafe_allow_html=True)
-    
-    with col3:
-        high_price_pct = (filtered_df['price_status'] == 'high').mean() * 100
-        st.markdown(f"""
-        <div class="metric-card">
-            <div class="metric-value">📈</div>
-            <div class="metric-value">{high_price_pct:.1f}%</div>
-            <div class="metric-label">Acima da Média</div>
+        <div style="background: #f8f9fa; padding: 8px; border-radius: 4px; flex: 1; text-align: center; min-height: 50px; max-height: 50px;">
+            <div style="font-size: 1.2rem; font-weight: bold; color: #2c3e50;">{high_price_pct:.1f}%</div>
+            <div style="font-size: 0.8rem; color: #666;">Acima da Média</div>
         </div>
-        """, unsafe_allow_html=True)
-    
-    with col4:
-        low_price_pct = (filtered_df['price_status'] == 'low').mean() * 100
-        st.markdown(f"""
-        <div class="metric-card">
-            <div class="metric-value">📉</div>
-            <div class="metric-value">{low_price_pct:.1f}%</div>
-            <div class="metric-label">Abaixo da Média</div>
+        <div style="background: #f8f9fa; padding: 8px; border-radius: 4px; flex: 1; text-align: center; min-height: 50px; max-height: 50px;">
+            <div style="font-size: 1.2rem; font-weight: bold; color: #2c3e50;">{low_price_pct:.1f}%</div>
+            <div style="font-size: 0.8rem; color: #666;">Abaixo da Média</div>
         </div>
-        """, unsafe_allow_html=True)
+    </div>
+    """, unsafe_allow_html=True)
     
     # Seletor de tipo de mapa logo acima do mapa
     map_style = st.selectbox(
