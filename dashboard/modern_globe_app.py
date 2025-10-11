@@ -96,10 +96,10 @@ st.markdown("""
     /* Property cards */
     .property-card {
         background: #f8f9fa;
-        border-radius: 12px;
-        padding: 1.5rem;
-        margin: 1rem 0;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        border-radius: 8px;
+        padding: 1rem;
+        margin: 0.5rem 0;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         border-left: 4px solid #3498db;
         transition: all 0.3s ease;
     }
@@ -107,6 +107,22 @@ st.markdown("""
     .property-card:hover {
         transform: translateX(5px);
         box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    }
+    
+    /* Containers menores e cinza claro */
+    .stMetric {
+        background: #f8f9fa !important;
+        border-radius: 8px !important;
+        padding: 0.5rem !important;
+        margin: 0.25rem !important;
+    }
+    
+    .stMetric > div {
+        padding: 0.5rem !important;
+    }
+    
+    .stMetric > div > div {
+        padding: 0.25rem !important;
     }
     
     .property-title {
@@ -790,32 +806,14 @@ def main():
         </div>
         """, unsafe_allow_html=True)
     
-    # Mapa interativo - PRINCIPAL
-    st.markdown("## 🗺️ Mapa Inteligente")
-    
-    # Opções do mapa acima do mapa
+    # Seletor de tipo de mapa logo acima do mapa
     map_style = st.selectbox(
         "🗺️ Tipo de Mapa",
         ["CartoDB Positron", "OpenStreetMap", "CartoDB Dark"]
     )
     
-    st.markdown("**💡 Dica**: Use o scroll do mouse para zoom. Cores indicam status do preço: 🔴 Alto, 🟡 Baixo, 🟢 Normal")
-    
-    # Instruções de navegação
-    col1, col2, col3 = st.columns(3)
-    with col1:
-        st.markdown("**🖱️ Mouse:**")
-        st.markdown("• Scroll: Zoom in/out")
-        st.markdown("• Arrastar: Mover mapa")
-    with col2:
-        st.markdown("**👆 Toque:**")
-        st.markdown("• Pinch: Zoom")
-        st.markdown("• Arrastar: Mover")
-    with col3:
-        st.markdown("**🎯 Cores:**")
-        st.markdown("• 🔴 Acima da média")
-        st.markdown("• 🟢 Preço normal")
-        st.markdown("• 🟡 Abaixo da média")
+    # Legenda de cores apenas
+    st.markdown("**🎯 Cores:** 🔴 Acima da média • 🟢 Preço normal • 🟡 Abaixo da média")
     
     # Criar mapa moderno
     folium_map = create_modern_map(
