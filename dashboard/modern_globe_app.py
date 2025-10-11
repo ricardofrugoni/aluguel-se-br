@@ -133,55 +133,55 @@ st.markdown("""
         background-color: #f8f9fa !important;
     }
     
-    /* Forçar fundo cinza no header do Airbnb - MAIS AGRESSIVO */
+    /* Forçar fundo cinza ESCURO no header do Airbnb - MAIS AGRESSIVO */
     .stApp > header,
     .stApp > header *,
     .stApp > header > div,
     .stApp > header > div *,
     .stApp > header > div > div,
     .stApp > header > div > div * {
-        background: #f8f9fa !important;
-        background-color: #f8f9fa !important;
+        background: #2c3e50 !important;
+        background-color: #2c3e50 !important;
     }
     
-    /* Forçar fundo cinza em TODOS os elementos */
+    /* Forçar fundo cinza ESCURO em TODOS os elementos */
     .stApp,
     .stApp *,
     .stApp > div,
     .stApp > div *,
     .stApp > div > div,
     .stApp > div > div * {
-        background: #f8f9fa !important;
-        background-color: #f8f9fa !important;
+        background: #2c3e50 !important;
+        background-color: #2c3e50 !important;
     }
     
-    /* Forçar fundo cinza no body */
+    /* Forçar fundo cinza ESCURO no body */
     body {
-        background: #f8f9fa !important;
-        background-color: #f8f9fa !important;
+        background: #2c3e50 !important;
+        background-color: #2c3e50 !important;
     }
     
-    /* Forçar fundo cinza no header específico do Airbnb */
+    /* Forçar fundo cinza ESCURO no header específico do Airbnb */
     .stApp > header[data-testid="stHeader"] {
-        background: #f8f9fa !important;
-        background-color: #f8f9fa !important;
+        background: #2c3e50 !important;
+        background-color: #2c3e50 !important;
     }
     
-    /* Forçar fundo cinza em todos os elementos do header */
+    /* Forçar fundo cinza ESCURO em todos os elementos do header */
     .stApp > header[data-testid="stHeader"] * {
-        background: #f8f9fa !important;
-        background-color: #f8f9fa !important;
+        background: #2c3e50 !important;
+        background-color: #2c3e50 !important;
     }
     
-    /* Forçar fundo cinza em todos os elementos do app */
+    /* Forçar fundo cinza ESCURO em todos os elementos do app */
     .stApp {
-        background: #f8f9fa !important;
-        background-color: #f8f9fa !important;
+        background: #2c3e50 !important;
+        background-color: #2c3e50 !important;
     }
     
     .stApp * {
-        background: #f8f9fa !important;
-        background-color: #f8f9fa !important;
+        background: #2c3e50 !important;
+        background-color: #2c3e50 !important;
     }
     
     /* Forçar fundo cinza em todos os elementos */
@@ -873,32 +873,32 @@ def main():
     
     st.markdown(f"""
     <div style="display: flex; gap: 8px; margin: 5px 0;">
-        <div style="background: #f8f9fa !important; background-color: #f8f9fa !important; padding: 8px; border-radius: 4px; flex: 1; display: flex; align-items: center; min-height: 50px; max-height: 50px;">
+        <div style="background: #34495e !important; background-color: #34495e !important; padding: 8px; border-radius: 4px; flex: 1; display: flex; align-items: center; min-height: 50px; max-height: 50px;">
             <div style="font-size: 1.5rem; margin-right: 8px;">🏠</div>
             <div style="flex: 1;">
-                <div style="font-size: 1.2rem; font-weight: bold; color: #000000;">{len(filtered_df):,}</div>
-                <div style="font-size: 0.8rem; color: #333333;">Propriedades</div>
+                <div style="font-size: 1.2rem; font-weight: bold; color: #ffffff;">{len(filtered_df):,}</div>
+                <div style="font-size: 0.8rem; color: #bdc3c7;">Propriedades</div>
             </div>
         </div>
-        <div style="background: #f8f9fa !important; background-color: #f8f9fa !important; padding: 8px; border-radius: 4px; flex: 1; display: flex; align-items: center; min-height: 50px; max-height: 50px;">
+        <div style="background: #34495e !important; background-color: #34495e !important; padding: 8px; border-radius: 4px; flex: 1; display: flex; align-items: center; min-height: 50px; max-height: 50px;">
             <div style="font-size: 1.5rem; margin-right: 8px;">💰</div>
             <div style="flex: 1;">
-                <div style="font-size: 1.2rem; font-weight: bold; color: #000000;">R$ {avg_price:.0f}</div>
-                <div style="font-size: 0.8rem; color: #333333;">Preço Médio</div>
+                <div style="font-size: 1.2rem; font-weight: bold; color: #ffffff;">R$ {avg_price:.0f}</div>
+                <div style="font-size: 0.8rem; color: #bdc3c7;">Preço Médio</div>
             </div>
         </div>
-        <div style="background: #f8f9fa !important; background-color: #f8f9fa !important; padding: 8px; border-radius: 4px; flex: 1; display: flex; align-items: center; min-height: 50px; max-height: 50px;">
+        <div style="background: #34495e !important; background-color: #34495e !important; padding: 8px; border-radius: 4px; flex: 1; display: flex; align-items: center; min-height: 50px; max-height: 50px;">
             <div style="font-size: 1.5rem; margin-right: 8px;">📈</div>
             <div style="flex: 1;">
-                <div style="font-size: 1.2rem; font-weight: bold; color: #000000;">{high_price_pct:.1f}%</div>
-                <div style="font-size: 0.8rem; color: #333333;">Acima da Média</div>
+                <div style="font-size: 1.2rem; font-weight: bold; color: #ffffff;">{high_price_pct:.1f}%</div>
+                <div style="font-size: 0.8rem; color: #bdc3c7;">Acima da Média</div>
             </div>
         </div>
-        <div style="background: #f8f9fa !important; background-color: #f8f9fa !important; padding: 8px; border-radius: 4px; flex: 1; display: flex; align-items: center; min-height: 50px; max-height: 50px;">
+        <div style="background: #34495e !important; background-color: #34495e !important; padding: 8px; border-radius: 4px; flex: 1; display: flex; align-items: center; min-height: 50px; max-height: 50px;">
             <div style="font-size: 1.5rem; margin-right: 8px;">📉</div>
             <div style="flex: 1;">
-                <div style="font-size: 1.2rem; font-weight: bold; color: #000000;">{low_price_pct:.1f}%</div>
-                <div style="font-size: 0.8rem; color: #333333;">Abaixo da Média</div>
+                <div style="font-size: 1.2rem; font-weight: bold; color: #ffffff;">{low_price_pct:.1f}%</div>
+                <div style="font-size: 0.8rem; color: #bdc3c7;">Abaixo da Média</div>
             </div>
         </div>
     </div>
