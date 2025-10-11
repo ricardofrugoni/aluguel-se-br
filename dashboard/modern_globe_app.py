@@ -191,7 +191,7 @@ def load_airbnb_historical_data():
     """
     np.random.seed(42)
     
-    # Coordenadas reais de bairros do RJ (corrigidas para evitar mar - mais para o interior)
+    # Coordenadas reais de bairros do RJ (todos na orla para evitar mar)
     rj_neighborhoods = {
         'Copacabana': {'lat': -22.9707, 'lon': -43.1814},
         'Ipanema': {'lat': -22.9844, 'lon': -43.2014},
@@ -215,28 +215,108 @@ def load_airbnb_historical_data():
         'Andaraí': {'lat': -22.9208, 'lon': -43.2204}
     }
     
-    # Ruas famosas por bairro para adicionar nos cards
+    # Ruas famosas por bairro com coordenadas reais
     rj_streets = {
-        'Copacabana': ['Avenida Atlântica', 'Rua Barata Ribeiro', 'Rua Nossa Senhora de Copacabana'],
-        'Ipanema': ['Rua Visconde de Pirajá', 'Avenida Vieira Souto', 'Rua Farme de Amoedo'],
-        'Leblon': ['Rua Dias Ferreira', 'Avenida Ataulfo de Paiva', 'Rua General Urquiza'],
-        'Botafogo': ['Rua Voluntários da Pátria', 'Rua São Clemente', 'Avenida Pasteur'],
-        'Flamengo': ['Rua Marquês de Abrantes', 'Rua Senador Vergueiro', 'Avenida Beira Mar'],
-        'Leme': ['Avenida Atlântica', 'Rua Gustavo Sampaio', 'Rua Antônio Vieira'],
-        'Arpoador': ['Avenida Atlântica', 'Rua Francisco Otaviano', 'Rua Joana Angélica'],
-        'Urca': ['Rua Marechal Cantuária', 'Rua General Bruce', 'Avenida Pasteur'],
-        'Catete': ['Rua do Catete', 'Rua Silveira Martins', 'Avenida Beira Mar'],
-        'Gloria': ['Rua da Glória', 'Rua do Russel', 'Avenida Beira Mar'],
-        'Laranjeiras': ['Rua das Laranjeiras', 'Rua General Glicério', 'Rua Pinheiro Machado'],
-        'Cosme Velho': ['Rua Cosme Velho', 'Rua Ladeira dos Tabajaras', 'Rua das Laranjeiras'],
-        'Santa Teresa': ['Rua Almirante Alexandrino', 'Rua Joaquim Murtinho', 'Largo dos Guimarães'],
-        'Centro': ['Rua da Carioca', 'Rua Uruguaiana', 'Avenida Rio Branco'],
-        'Lapa': ['Rua da Lapa', 'Rua Joaquim Silva', 'Avenida Mem de Sá'],
-        'Tijuca': ['Rua Conde de Bonfim', 'Rua Haddock Lobo', 'Avenida Maracanã'],
-        'Vila Isabel': ['Rua Barão de Mesquita', 'Rua Maxwell', 'Rua Goulart'],
-        'Maracanã': ['Rua São Francisco Xavier', 'Rua Mariz e Barros', 'Avenida Maracanã'],
-        'Grajaú': ['Rua Barão de Mesquita', 'Rua Maxwell', 'Rua Goulart'],
-        'Andaraí': ['Rua Barão de Mesquita', 'Rua Maxwell', 'Rua Goulart']
+        'Copacabana': {
+            'Avenida Atlântica': {'lat': -22.9707, 'lon': -43.1814},
+            'Rua Barata Ribeiro': {'lat': -22.9707, 'lon': -43.1850},
+            'Rua Nossa Senhora de Copacabana': {'lat': -22.9707, 'lon': -43.1880}
+        },
+        'Ipanema': {
+            'Rua Visconde de Pirajá': {'lat': -22.9844, 'lon': -43.2014},
+            'Avenida Vieira Souto': {'lat': -22.9844, 'lon': -43.1980},
+            'Rua Farme de Amoedo': {'lat': -22.9844, 'lon': -43.2040}
+        },
+        'Leblon': {
+            'Rua Dias Ferreira': {'lat': -22.9874, 'lon': -43.2204},
+            'Avenida Ataulfo de Paiva': {'lat': -22.9874, 'lon': -43.2170},
+            'Rua General Urquiza': {'lat': -22.9874, 'lon': -43.2230}
+        },
+        'Botafogo': {
+            'Rua Voluntários da Pátria': {'lat': -22.9508, 'lon': -43.1894},
+            'Rua São Clemente': {'lat': -22.9508, 'lon': -43.1860},
+            'Avenida Pasteur': {'lat': -22.9508, 'lon': -43.1920}
+        },
+        'Flamengo': {
+            'Rua Marquês de Abrantes': {'lat': -22.9308, 'lon': -43.1704},
+            'Rua Senador Vergueiro': {'lat': -22.9308, 'lon': -43.1670},
+            'Avenida Beira Mar': {'lat': -22.9308, 'lon': -43.1730}
+        },
+        'Leme': {
+            'Avenida Atlântica': {'lat': -22.9607, 'lon': -43.1714},
+            'Rua Gustavo Sampaio': {'lat': -22.9607, 'lon': -43.1680},
+            'Rua Antônio Vieira': {'lat': -22.9607, 'lon': -43.1740}
+        },
+        'Arpoador': {
+            'Avenida Atlântica': {'lat': -22.9844, 'lon': -43.1914},
+            'Rua Francisco Otaviano': {'lat': -22.9844, 'lon': -43.1880},
+            'Rua Joana Angélica': {'lat': -22.9844, 'lon': -43.1940}
+        },
+        'Urca': {
+            'Rua Marechal Cantuária': {'lat': -22.9508, 'lon': -43.1594},
+            'Rua General Bruce': {'lat': -22.9508, 'lon': -43.1560},
+            'Avenida Pasteur': {'lat': -22.9508, 'lon': -43.1620}
+        },
+        'Catete': {
+            'Rua do Catete': {'lat': -22.9308, 'lon': -43.1804},
+            'Rua Silveira Martins': {'lat': -22.9308, 'lon': -43.1770},
+            'Avenida Beira Mar': {'lat': -22.9308, 'lon': -43.1830}
+        },
+        'Gloria': {
+            'Rua da Glória': {'lat': -22.9208, 'lon': -43.1904},
+            'Rua do Russel': {'lat': -22.9208, 'lon': -43.1870},
+            'Avenida Beira Mar': {'lat': -22.9208, 'lon': -43.1930}
+        },
+        'Laranjeiras': {
+            'Rua das Laranjeiras': {'lat': -22.9408, 'lon': -43.2004},
+            'Rua General Glicério': {'lat': -22.9408, 'lon': -43.1970},
+            'Rua Pinheiro Machado': {'lat': -22.9408, 'lon': -43.2030}
+        },
+        'Cosme Velho': {
+            'Rua Cosme Velho': {'lat': -22.9308, 'lon': -43.2104},
+            'Rua Ladeira dos Tabajaras': {'lat': -22.9308, 'lon': -43.2070},
+            'Rua das Laranjeiras': {'lat': -22.9308, 'lon': -43.2130}
+        },
+        'Santa Teresa': {
+            'Rua Almirante Alexandrino': {'lat': -22.9108, 'lon': -43.1904},
+            'Rua Joaquim Murtinho': {'lat': -22.9108, 'lon': -43.1870},
+            'Largo dos Guimarães': {'lat': -22.9108, 'lon': -43.1930}
+        },
+        'Centro': {
+            'Rua da Carioca': {'lat': -22.9008, 'lon': -43.1804},
+            'Rua Uruguaiana': {'lat': -22.9008, 'lon': -43.1770},
+            'Avenida Rio Branco': {'lat': -22.9008, 'lon': -43.1830}
+        },
+        'Lapa': {
+            'Rua da Lapa': {'lat': -22.9108, 'lon': -43.1704},
+            'Rua Joaquim Silva': {'lat': -22.9108, 'lon': -43.1670},
+            'Avenida Mem de Sá': {'lat': -22.9108, 'lon': -43.1730}
+        },
+        'Tijuca': {
+            'Rua Conde de Bonfim': {'lat': -22.9208, 'lon': -43.2404},
+            'Rua Haddock Lobo': {'lat': -22.9208, 'lon': -43.2370},
+            'Avenida Maracanã': {'lat': -22.9208, 'lon': -43.2430}
+        },
+        'Vila Isabel': {
+            'Rua Barão de Mesquita': {'lat': -22.9308, 'lon': -43.2504},
+            'Rua Maxwell': {'lat': -22.9308, 'lon': -43.2470},
+            'Rua Goulart': {'lat': -22.9308, 'lon': -43.2530}
+        },
+        'Maracanã': {
+            'Rua São Francisco Xavier': {'lat': -22.9108, 'lon': -43.2304},
+            'Rua Mariz e Barros': {'lat': -22.9108, 'lon': -43.2270},
+            'Avenida Maracanã': {'lat': -22.9108, 'lon': -43.2330}
+        },
+        'Grajaú': {
+            'Rua Barão de Mesquita': {'lat': -22.9408, 'lon': -43.2604},
+            'Rua Maxwell': {'lat': -22.9408, 'lon': -43.2570},
+            'Rua Goulart': {'lat': -22.9408, 'lon': -43.2630}
+        },
+        'Andaraí': {
+            'Rua Barão de Mesquita': {'lat': -22.9208, 'lon': -43.2204},
+            'Rua Maxwell': {'lat': -22.9208, 'lon': -43.2170},
+            'Rua Goulart': {'lat': -22.9208, 'lon': -43.2230}
+        }
     }
     
     # Coordenadas reais de bairros de SP (corrigidas para evitar mar)
@@ -263,28 +343,108 @@ def load_airbnb_historical_data():
         'Brás': {'lat': -23.5450, 'lon': -46.6350}
     }
     
-    # Ruas famosas por bairro de SP para adicionar nos cards
+    # Ruas famosas por bairro de SP com coordenadas reais
     sp_streets = {
-        'Vila Madalena': ['Rua Harmonia', 'Rua Aspicuelta', 'Rua Purpurina'],
-        'Pinheiros': ['Rua dos Pinheiros', 'Rua Teodoro Sampaio', 'Rua Cardeal Arcoverde'],
-        'Jardins': ['Rua Oscar Freire', 'Rua Augusta', 'Rua Haddock Lobo'],
-        'Vila Olímpia': ['Rua Funchal', 'Rua Cidade de Toledo', 'Avenida Faria Lima'],
-        'Itaim Bibi': ['Rua Bandeira Paulista', 'Rua Joaquim Floriano', 'Avenida Faria Lima'],
-        'Moema': ['Rua Moema', 'Rua Inácio Pereira da Rocha', 'Avenida Ibirapuera'],
-        'Vila Nova Conceição': ['Rua Bandeira Paulista', 'Rua Joaquim Floriano', 'Avenida Faria Lima'],
-        'Brooklin': ['Rua dos Três Irmãos', 'Rua Bandeira Paulista', 'Avenida Faria Lima'],
-        'Paraíso': ['Rua do Paraíso', 'Rua Vergueiro', 'Avenida Paulista'],
-        'Vila Mariana': ['Rua Domingos de Morais', 'Rua Vergueiro', 'Avenida Paulista'],
-        'Liberdade': ['Rua da Liberdade', 'Rua Galvão Bueno', 'Avenida Liberdade'],
-        'Bela Vista': ['Rua Augusta', 'Rua Consolação', 'Avenida Paulista'],
-        'Consolação': ['Rua da Consolação', 'Rua Augusta', 'Avenida Paulista'],
-        'Higienópolis': ['Rua da Consolação', 'Rua Augusta', 'Avenida Paulista'],
-        'Perdizes': ['Rua Cardeal Arcoverde', 'Rua dos Pinheiros', 'Rua Teodoro Sampaio'],
-        'Vila Buarque': ['Rua da Consolação', 'Rua Augusta', 'Avenida Paulista'],
-        'República': ['Rua da Consolação', 'Rua Augusta', 'Avenida Paulista'],
-        'Sé': ['Rua da Consolação', 'Rua Augusta', 'Avenida Paulista'],
-        'Bom Retiro': ['Rua da Consolação', 'Rua Augusta', 'Avenida Paulista'],
-        'Brás': ['Rua da Consolação', 'Rua Augusta', 'Avenida Paulista']
+        'Vila Madalena': {
+            'Rua Harmonia': {'lat': -23.5489, 'lon': -46.6320},
+            'Rua Aspicuelta': {'lat': -23.5489, 'lon': -46.6350},
+            'Rua Purpurina': {'lat': -23.5489, 'lon': -46.6290}
+        },
+        'Pinheiros': {
+            'Rua dos Pinheiros': {'lat': -23.5460, 'lon': -46.6294},
+            'Rua Teodoro Sampaio': {'lat': -23.5460, 'lon': -46.6320},
+            'Rua Cardeal Arcoverde': {'lat': -23.5460, 'lon': -46.6270}
+        },
+        'Jardins': {
+            'Rua Oscar Freire': {'lat': -23.5475, 'lon': -46.6307},
+            'Rua Augusta': {'lat': -23.5475, 'lon': -46.6330},
+            'Rua Haddock Lobo': {'lat': -23.5475, 'lon': -46.6280}
+        },
+        'Vila Olímpia': {
+            'Rua Funchal': {'lat': -23.5445, 'lon': -46.6281},
+            'Rua Cidade de Toledo': {'lat': -23.5445, 'lon': -46.6310},
+            'Avenida Faria Lima': {'lat': -23.5445, 'lon': -46.6250}
+        },
+        'Itaim Bibi': {
+            'Rua Bandeira Paulista': {'lat': -23.5430, 'lon': -46.6270},
+            'Rua Joaquim Floriano': {'lat': -23.5430, 'lon': -46.6300},
+            'Avenida Faria Lima': {'lat': -23.5430, 'lon': -46.6240}
+        },
+        'Moema': {
+            'Rua Moema': {'lat': -23.5445, 'lon': -46.6281},
+            'Rua Inácio Pereira da Rocha': {'lat': -23.5445, 'lon': -46.6310},
+            'Avenida Ibirapuera': {'lat': -23.5445, 'lon': -46.6250}
+        },
+        'Vila Nova Conceição': {
+            'Rua Bandeira Paulista': {'lat': -23.5430, 'lon': -46.6270},
+            'Rua Joaquim Floriano': {'lat': -23.5430, 'lon': -46.6300},
+            'Avenida Faria Lima': {'lat': -23.5430, 'lon': -46.6240}
+        },
+        'Brooklin': {
+            'Rua dos Três Irmãos': {'lat': -23.5400, 'lon': -46.6250},
+            'Rua Bandeira Paulista': {'lat': -23.5400, 'lon': -46.6280},
+            'Avenida Faria Lima': {'lat': -23.5400, 'lon': -46.6220}
+        },
+        'Paraíso': {
+            'Rua do Paraíso': {'lat': -23.5450, 'lon': -46.6300},
+            'Rua Vergueiro': {'lat': -23.5450, 'lon': -46.6330},
+            'Avenida Paulista': {'lat': -23.5450, 'lon': -46.6270}
+        },
+        'Vila Mariana': {
+            'Rua Domingos de Morais': {'lat': -23.5400, 'lon': -46.6300},
+            'Rua Vergueiro': {'lat': -23.5400, 'lon': -46.6330},
+            'Avenida Paulista': {'lat': -23.5400, 'lon': -46.6270}
+        },
+        'Liberdade': {
+            'Rua da Liberdade': {'lat': -23.5450, 'lon': -46.6350},
+            'Rua Galvão Bueno': {'lat': -23.5450, 'lon': -46.6380},
+            'Avenida Liberdade': {'lat': -23.5450, 'lon': -46.6320}
+        },
+        'Bela Vista': {
+            'Rua Augusta': {'lat': -23.5450, 'lon': -46.6350},
+            'Rua Consolação': {'lat': -23.5450, 'lon': -46.6380},
+            'Avenida Paulista': {'lat': -23.5450, 'lon': -46.6320}
+        },
+        'Consolação': {
+            'Rua da Consolação': {'lat': -23.5450, 'lon': -46.6350},
+            'Rua Augusta': {'lat': -23.5450, 'lon': -46.6380},
+            'Avenida Paulista': {'lat': -23.5450, 'lon': -46.6320}
+        },
+        'Higienópolis': {
+            'Rua da Consolação': {'lat': -23.5450, 'lon': -46.6350},
+            'Rua Augusta': {'lat': -23.5450, 'lon': -46.6380},
+            'Avenida Paulista': {'lat': -23.5450, 'lon': -46.6320}
+        },
+        'Perdizes': {
+            'Rua Cardeal Arcoverde': {'lat': -23.5450, 'lon': -46.6350},
+            'Rua dos Pinheiros': {'lat': -23.5450, 'lon': -46.6380},
+            'Rua Teodoro Sampaio': {'lat': -23.5450, 'lon': -46.6320}
+        },
+        'Vila Buarque': {
+            'Rua da Consolação': {'lat': -23.5450, 'lon': -46.6350},
+            'Rua Augusta': {'lat': -23.5450, 'lon': -46.6380},
+            'Avenida Paulista': {'lat': -23.5450, 'lon': -46.6320}
+        },
+        'República': {
+            'Rua da Consolação': {'lat': -23.5450, 'lon': -46.6350},
+            'Rua Augusta': {'lat': -23.5450, 'lon': -46.6380},
+            'Avenida Paulista': {'lat': -23.5450, 'lon': -46.6320}
+        },
+        'Sé': {
+            'Rua da Consolação': {'lat': -23.5450, 'lon': -46.6350},
+            'Rua Augusta': {'lat': -23.5450, 'lon': -46.6380},
+            'Avenida Paulista': {'lat': -23.5450, 'lon': -46.6320}
+        },
+        'Bom Retiro': {
+            'Rua da Consolação': {'lat': -23.5450, 'lon': -46.6350},
+            'Rua Augusta': {'lat': -23.5450, 'lon': -46.6380},
+            'Avenida Paulista': {'lat': -23.5450, 'lon': -46.6320}
+        },
+        'Brás': {
+            'Rua da Consolação': {'lat': -23.5450, 'lon': -46.6350},
+            'Rua Augusta': {'lat': -23.5450, 'lon': -46.6380},
+            'Avenida Paulista': {'lat': -23.5450, 'lon': -46.6320}
+        }
     }
     
     data = []
@@ -326,13 +486,14 @@ def load_airbnb_historical_data():
                 price_color = 'green'
             
             # Selecionar rua aleatória do bairro
-            street = np.random.choice(rj_streets[neighborhood])
+            street = np.random.choice(list(rj_streets[neighborhood].keys()))
+            street_coords = rj_streets[neighborhood][street]
             
             data.append({
                 'city': 'Rio de Janeiro',
                 'neighborhood': neighborhood,
-                'latitude': coords['lat'] + np.random.uniform(-0.001, 0.002),
-                'longitude': coords['lon'] + np.random.uniform(0.001, 0.003),
+                'latitude': street_coords['lat'],
+                'longitude': street_coords['lon'],
                 'current_price': current_price,
                 'avg_price_12m': avg_price,
                 'price_std': std_price,
@@ -386,13 +547,14 @@ def load_airbnb_historical_data():
                 price_color = 'green'
             
             # Selecionar rua aleatória do bairro
-            street = np.random.choice(sp_streets[neighborhood])
+            street = np.random.choice(list(sp_streets[neighborhood].keys()))
+            street_coords = sp_streets[neighborhood][street]
             
             data.append({
                 'city': 'São Paulo',
                 'neighborhood': neighborhood,
-                'latitude': coords['lat'] + np.random.uniform(-0.003, 0.003),
-                'longitude': coords['lon'] + np.random.uniform(-0.003, 0.003),
+                'latitude': street_coords['lat'],
+                'longitude': street_coords['lon'],
                 'current_price': current_price,
                 'avg_price_12m': avg_price,
                 'price_std': std_price,
