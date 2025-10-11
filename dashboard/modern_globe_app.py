@@ -646,21 +646,24 @@ def create_modern_map(df, selected_city=None, selected_neighborhood=None, map_st
         tiles='Stamen Terrain',
         name='Stamen Terrain',
         overlay=False,
-        control=True
+        control=True,
+        attr='Map tiles by Stamen Design, under CC BY 3.0. Data by OpenStreetMap, under ODbL.'
     ).add_to(m)
     
     folium.TileLayer(
         tiles='Stamen Toner',
         name='Stamen Toner',
         overlay=False,
-        control=True
+        control=True,
+        attr='Map tiles by Stamen Design, under CC BY 3.0. Data by OpenStreetMap, under ODbL.'
     ).add_to(m)
     
     folium.TileLayer(
         tiles='Stamen Watercolor',
         name='Stamen Watercolor',
         overlay=False,
-        control=True
+        control=True,
+        attr='Map tiles by Stamen Design, under CC BY 3.0. Data by OpenStreetMap, under ODbL.'
     ).add_to(m)
     
     # Adicionar controle de camadas
