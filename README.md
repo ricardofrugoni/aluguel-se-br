@@ -9,9 +9,9 @@
 
 **Sistema Inteligente de Análise de Preços para Aluguel por Temporada**
 
-[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://airbnb-price-prediction.streamlit.app)
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://share.streamlit.io)
 
-**[🌐 Live Demo - Interactive Dashboard](https://airbnb-price-prediction.streamlit.app)**
+**[🌐 Live Demo - Interactive Dashboard](https://share.streamlit.io)**
 
 </div>
 
@@ -618,7 +618,7 @@ Este projeto está licenciado sob a **MIT License** - veja o arquivo [LICENSE](L
 - 📖 **Documentação**: [docs/](docs/)
 
 ### **Links Úteis**
-- 🌐 **Live Demo**: [Dashboard Interativo](https://airbnb-price-prediction.streamlit.app)
+- 🌐 **Live Demo**: [Dashboard Interativo](https://share.streamlit.io)
 - 📊 **Dados**: [Inside Airbnb](http://insideairbnb.com)
 - 🗺️ **POIs**: [OpenStreetMap](https://www.openstreetmap.org)
 
