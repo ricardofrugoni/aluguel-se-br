@@ -133,47 +133,47 @@ st.markdown("""
         background-color: #f8f9fa !important;
     }
     
-    /* Forçar fundo cinza claro #a9a9a9 - SUPER AGRESSIVO */
+    /* Forçar fundo cinza #555555 - SUPER AGRESSIVO */
     .stApp {
-        background: #a9a9a9 !important;
-        background-color: #a9a9a9 !important;
+        background: #555555 !important;
+        background-color: #555555 !important;
     }
     
     .stApp * {
-        background: #a9a9a9 !important;
-        background-color: #a9a9a9 !important;
+        background: #555555 !important;
+        background-color: #555555 !important;
     }
     
     .stApp > div {
-        background: #a9a9a9 !important;
-        background-color: #a9a9a9 !important;
+        background: #555555 !important;
+        background-color: #555555 !important;
     }
     
     .stApp > div * {
-        background: #a9a9a9 !important;
-        background-color: #a9a9a9 !important;
+        background: #555555 !important;
+        background-color: #555555 !important;
     }
     
     .stApp > div > div {
-        background: #a9a9a9 !important;
-        background-color: #a9a9a9 !important;
+        background: #555555 !important;
+        background-color: #555555 !important;
     }
     
     .stApp > div > div * {
-        background: #a9a9a9 !important;
-        background-color: #a9a9a9 !important;
+        background: #555555 !important;
+        background-color: #555555 !important;
     }
     
-    /* Forçar fundo cinza claro no body */
+    /* Forçar fundo cinza no body */
     body {
-        background: #a9a9a9 !important;
-        background-color: #a9a9a9 !important;
+        background: #555555 !important;
+        background-color: #555555 !important;
     }
     
-    /* Forçar fundo cinza claro em TODOS os elementos */
+    /* Forçar fundo cinza em TODOS os elementos */
     * {
-        background: #a9a9a9 !important;
-        background-color: #a9a9a9 !important;
+        background: #555555 !important;
+        background-color: #555555 !important;
     }
     
     /* Forçar fundo cinza em todos os elementos */
@@ -742,21 +742,24 @@ def create_modern_map(df, selected_city=None, selected_neighborhood=None, map_st
         tiles='OpenStreetMap',
         name='Normal (Ruas)',
         overlay=False,
-        control=True
+        control=True,
+        attr='OpenStreetMap contributors'
     ).add_to(m)
     
     folium.TileLayer(
         tiles='CartoDB positron',
         name='Google Maps',
         overlay=False,
-        control=True
+        control=True,
+        attr='CartoDB'
     ).add_to(m)
     
     folium.TileLayer(
         tiles='CartoDB dark_matter',
         name='Escuro (Dark)',
         overlay=False,
-        control=True
+        control=True,
+        attr='CartoDB'
     ).add_to(m)
     
     # Adicionar controle de camadas
