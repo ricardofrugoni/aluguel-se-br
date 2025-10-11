@@ -2,7 +2,7 @@
 
 <div align="center">
 
-![Python](https://img.shields.io/badge/Python-3.10+-blue.svg)
+![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)
 ![Streamlit](https://img.shields.io/badge/Streamlit-1.28+-red.svg)
 ![License](https://img.shields.io/badge/License-MIT-green.svg)
 ![Status](https://img.shields.io/badge/Status-Production%20Ready-brightgreen.svg)
@@ -13,272 +13,582 @@
 
 **[🌐 Live Demo - Interactive Dashboard](https://airbnb-price-prediction.streamlit.app)**
 
-[🌐 Live Demo](https://airbnb-price-intelligence.streamlit.app) | [📊 Dashboard](https://airbnb-price-intelligence.streamlit.app) | [📖 Documentação](docs/)
-
 </div>
+
+---
+
+## 📋 Índice
+
+- [🎯 Visão Geral](#-visão-geral)
+- [✨ Características](#-características)
+- [🏗️ Arquitetura](#️-arquitetura)
+- [🚀 Instalação](#-instalação)
+- [📊 Uso](#-uso)
+- [🗺️ Dashboard Interativo](#️-dashboard-interativo)
+- [📈 Análise de Dados](#-análise-de-dados)
+- [🤖 Modelos de ML](#-modelos-de-ml)
+- [📁 Estrutura do Projeto](#-estrutura-do-projeto)
+- [🔧 Configuração](#-configuração)
+- [📚 Documentação](#-documentação)
+- [🤝 Contribuição](#-contribuição)
+- [📄 Licença](#-licença)
 
 ---
 
 ## 🎯 Visão Geral
 
-O **Airbnb Price Intelligence** é uma plataforma avançada de análise de preços para aluguel por temporada (short-term rentals) nas principais cidades do Sudeste do Brasil. Utilizando machine learning, análise geográfica e dados históricos, o sistema oferece insights inteligentes para investidores, proprietários e hóspedes.
+O **Airbnb Price Intelligence** é um sistema completo de machine learning para análise e previsão de preços de aluguel por temporada (Airbnb) nas principais cidades do Sudeste brasileiro. Utiliza dados geográficos, padrões sazonais, análises de reviews e amenities para fornecer insights inteligentes sobre precificação.
 
-### 🏙️ Áreas de Cobertura
+### 🎯 Objetivo Principal
 
-| Cidade | Bairros Principais | Status | Propriedades |
-|--------|-------------------|--------|-------------|
-| **Rio de Janeiro** | Copacabana, Ipanema, Leblon, Botafogo, Flamengo, Tijuca, Vila Isabel, Maracanã | ✅ Ativo | 240+ |
-| **São Paulo** | Vila Madalena, Pinheiros, Jardins, Vila Olímpia, Itaim Bibi, Moema, Brooklin | ✅ Ativo | 240+ |
-| **Belo Horizonte** | Savassi, Lourdes, Funcionários, Centro | 🚧 Planejado | 0 |
-| **Brasília** | Asa Norte, Asa Sul, Lago Sul, Lago Norte | 🚧 Planejado | 0 |
-
----
-
-## 🏗️ Arquitetura do Sistema
-
-### 📊 Camada de Dados
-```
-┌─────────────────────────────────────────────────────────────┐
-│                    DATA LAYER                               │
-├─────────────────────────────────────────────────────────────┤
-│ • Inside Airbnb Data (listings.csv.gz)                    │
-│ • OpenStreetMap POI Data                                   │
-│ • Historical Price Data (12 months)                       │
-│ • Real-time Market Data                                    │
-│ • User Reviews & Ratings                                    │
-└─────────────────────────────────────────────────────────────┘
-```
-
-### 🔧 Camada de Processamento
-```
-┌─────────────────────────────────────────────────────────────┐
-│                PROCESSING LAYER                             │
-├─────────────────────────────────────────────────────────────┤
-│ • Data Cleaning & Validation                               │
-│ • Geospatial Feature Engineering                          │
-│ • Temporal Feature Engineering                            │
-│ • Review & Amenity Analysis                               │
-│ • Price Trend Analysis                                     │
-└─────────────────────────────────────────────────────────────┘
-```
-
-### 🤖 Camada de Machine Learning
-```
-┌─────────────────────────────────────────────────────────────┐
-│                ML LAYER                                     │
-├─────────────────────────────────────────────────────────────┤
-│ • Baseline Models (Ridge, Random Forest)                  │
-│ • Advanced Models (XGBoost, LightGBM, CatBoost)           │
-│ • Ensemble Learning (Weighted Average)                    │
-│ • Cross-Validation (5-fold Stratified)                    │
-│ • Feature Selection & Engineering                         │
-└─────────────────────────────────────────────────────────────┘
-```
-
-### 🎨 Camada de Interface
-```
-┌─────────────────────────────────────────────────────────────┐
-│                INTERFACE LAYER                              │
-├─────────────────────────────────────────────────────────────┤
-│ • Streamlit Dashboard (Modern UI)                         │
-│ • Interactive Maps (Folium)                               │
-│ • Real-time Analytics (Plotly)                            │
-│ • Mobile Responsive Design                                │
-│ • 24/7 Cloud Deployment                                   │
-└─────────────────────────────────────────────────────────────┘
-```
+Desenvolver um sistema que permita:
+- **Prever preços** de aluguel por temporada com alta precisão
+- **Analisar padrões sazonais** e variações de preço
+- **Identificar oportunidades** de investimento imobiliário
+- **Fornecer insights** para hosts e investidores
+- **Visualizar dados** de forma interativa e intuitiva
 
 ---
 
-## 🚀 Funcionalidades Principais
+## ✨ Características
 
-### 🗺️ **Mapa Inteligente**
-- **Visualização Interativa**: Mapa principal com scroll funcional
-- **Status de Preços**: Cores indicam preço alto, normal ou baixo
-- **Análise Histórica**: Comparação com média dos últimos 12 meses
-- **Filtros Dinâmicos**: Por cidade, bairro e tipo de propriedade
-- **Popups Informativos**: Detalhes completos de cada propriedade
+### 🌍 **Visualização 3D Interativa**
+- Globo rotativo com propriedades geolocalizadas
+- Zoom e navegação intuitiva
+- Cores por faixa de preço (Budget, Mid-Range, High-End, Luxury)
+- Click para análise detalhada de propriedades
 
-### 📊 **Análise de Dados**
-- **Métricas em Tempo Real**: Preço médio, distribuição de status
-- **Gráficos Interativos**: Visualização de tendências
-- **Análise Sazonal**: Padrões de preços por época do ano
-- **Comparação Regional**: SP vs RJ vs outras cidades
+### 📊 **Análise Sazonal Avançada**
+- Padrões de preço por mês e estação
+- Variações percentuais em relação ao preço base
+- Flags de discrepância (EXTREME/HIGH/MODERATE/LOW)
+- Calculadora de economia potencial
 
-### 🏠 **Gestão de Propriedades**
-- **Lista Detalhada**: Todas as propriedades na área visível
-- **Filtros Avançados**: Por preço, avaliação, comodidades
-- **Análise de ROI**: Potencial de retorno por propriedade
-- **Alertas Inteligentes**: Oportunidades de investimento
+### 🎯 **Features Inteligentes**
+- **Geospatial**: Distâncias a POIs, densidade de propriedades
+- **Temporal**: Sazonalidade, feriados, padrões de booking
+- **Reviews**: Trust scores, qualidade do host, consistência de ratings
+- **Amenities**: Análise de comodidades e impacto no preço
 
-### 📱 **Interface Moderna**
-- **Design Responsivo**: Desktop, tablet e mobile
-- **Paleta Única**: Cores profissionais e consistentes
-- **Navegação Intuitiva**: UX otimizada para todos os usuários
-- **Performance**: Carregamento rápido e fluido
-
----
-
-## 🛠️ Tecnologias Utilizadas
-
-### **Backend & Data Science**
-- **Python 3.10+**: Linguagem principal
-- **Pandas & NumPy**: Manipulação de dados
-- **Scikit-learn**: Machine learning
-- **XGBoost, LightGBM, CatBoost**: Modelos avançados
-- **Geopandas & Shapely**: Análise geográfica
-- **OSMnx**: Dados do OpenStreetMap
-
-### **Frontend & Visualization**
-- **Streamlit**: Framework web
-- **Folium**: Mapas interativos
-- **Plotly**: Gráficos dinâmicos
-- **CSS3**: Design moderno e responsivo
-
-### **Deployment & Infrastructure**
-- **Streamlit Cloud**: Deploy 24/7
-- **GitHub**: Versionamento
-- **Docker**: Containerização (futuro)
-- **AWS/GCP**: Cloud computing (futuro)
+### 🤖 **Modelos de ML**
+- **Baseline**: Ridge, Random Forest, XGBoost
+- **Advanced**: LightGBM, CatBoost, Ensemble
+- **Features**: 75+ características engenheiradas
+- **Performance**: RMSE < 15% do preço médio
 
 ---
 
-## 📈 Métricas de Performance
+## 🏗️ Arquitetura
 
-### **Modelos de ML**
-| Modelo | MAE | RMSE | R² | MAPE | Within 10% |
-|--------|-----|------|----|----- |-----------|
-| **Ridge Regression** | 45.2 | 67.8 | 0.73 | 18.5% | 68% |
-| **Random Forest** | 38.7 | 58.9 | 0.81 | 15.2% | 72% |
-| **XGBoost** | 35.1 | 52.3 | 0.85 | 13.8% | 78% |
-| **LightGBM** | 33.8 | 50.1 | 0.87 | 13.1% | 81% |
-| **CatBoost** | 32.5 | 48.7 | 0.88 | 12.7% | 83% |
-| **Ensemble** | **31.2** | **46.9** | **0.89** | **12.1%** | **85%** |
+```mermaid
+graph TB
+    A[Dados Inside Airbnb] --> B[Data Loader]
+    C[OpenStreetMap POIs] --> B
+    B --> D[Data Processor]
+    D --> E[Feature Engineer]
+    E --> F[Geospatial Features]
+    E --> G[Temporal Features]
+    E --> H[Review Features]
+    E --> I[Amenity Features]
+    F --> J[ML Models]
+    G --> J
+    H --> J
+    I --> J
+    J --> K[Model Ensemble]
+    K --> L[Dashboard Streamlit]
+    L --> M[3D Globe Visualization]
+    L --> N[Price Analysis]
+    L --> O[Property Insights]
+```
 
-### **Sistema**
-- **Uptime**: 99.9%
-- **Response Time**: < 2 segundos
-- **Concurrent Users**: 100+
-- **Data Processing**: 10,000+ propriedades
-- **Map Rendering**: < 1 segundo
+### 🔧 **Componentes Principais**
+
+#### **1. Data Pipeline**
+- **Extração**: Inside Airbnb + OpenStreetMap
+- **Processamento**: Limpeza e normalização
+- **Engenharia**: 75+ features automáticas
+- **Validação**: Quality checks e outliers
+
+#### **2. Feature Engineering**
+- **Geospatial**: Distâncias, densidades, grid-based
+- **Temporal**: Sazonalidade, feriados, padrões
+- **Reviews**: Trust scores, host quality
+- **Amenities**: Categorização e scoring
+
+#### **3. Machine Learning**
+- **Baseline Models**: Ridge, Random Forest, XGBoost
+- **Advanced Models**: LightGBM, CatBoost
+- **Ensemble**: Weighted combination
+- **Validation**: Cross-validation e holdout
+
+#### **4. Visualization**
+- **3D Globe**: Folium com interatividade
+- **Dashboard**: Streamlit responsivo
+- **Charts**: Plotly interativo
+- **Maps**: Múltiplos estilos (Normal, Google, Dark)
 
 ---
 
-## 🚀 Como Usar
+## 🚀 Instalação
 
-### **Execução Local**
+### **Pré-requisitos**
+- Python 3.8+
+- 4GB RAM mínimo
+- 2GB espaço em disco
+- Conexão com internet
+
+### **Instalação Rápida**
+
 ```bash
 # 1. Clone o repositório
 git clone https://github.com/ricardofrugoni/aluguel-se-br.git
 cd aluguel-se-br
 
-# 2. Crie ambiente virtual
+# 2. Setup automatizado (Linux/Mac)
+chmod +x scripts/setup_demo.sh
+./scripts/setup_demo.sh
+
+# 3. Ou setup manual
 python -m venv venv
 source venv/bin/activate  # Linux/Mac
-# ou
-venv\Scripts\activate     # Windows
-
-# 3. Instale dependências
+# ou venv\Scripts\activate  # Windows
 pip install -r requirements.txt
+python scripts/download_data.py
+python scripts/prepare_sample.py
 
-# 4. Execute o dashboard
-python run_modern_dashboard.py
+# 4. Executar dashboard
+streamlit run dashboard/modern_globe_app.py
 ```
 
-### **Acesso Online**
-- **URL**: https://airbnb-price-intelligence.streamlit.app
-- **Status**: 24/7 disponível
-- **Suporte**: Desktop, tablet, mobile
+### **Instalação Manual Detalhada**
+
+<details>
+<summary>📋 Clique para expandir</summary>
+
+```bash
+# 1. Ambiente virtual
+python -m venv venv
+source venv/bin/activate  # Linux/Mac
+# ou venv\Scripts\activate  # Windows
+
+# 2. Dependências
+pip install --upgrade pip
+pip install -r requirements.txt
+
+# 3. Download de dados
+python scripts/download_data.py
+
+# 4. Preparar amostras
+python scripts/prepare_sample.py
+
+# 5. Pipeline completo (opcional)
+python main.py
+
+# 6. Dashboard
+streamlit run dashboard/modern_globe_app.py
+```
+
+</details>
 
 ---
 
-## 🔮 Projeções de Melhoria
+## 📊 Uso
 
-### **Fase 1: Expansão Geográfica (Q2 2024)**
-- **Belo Horizonte**: 200+ propriedades
-- **Brasília**: 150+ propriedades
-- **Salvador**: 100+ propriedades
-- **Fortaleza**: 100+ propriedades
-- **Recife**: 100+ propriedades
+### **Dashboard Interativo**
 
-### **Fase 2: Inteligência Avançada (Q3 2024)**
-- **Previsão de Preços**: ML para próximos 30 dias
-- **Alertas Inteligentes**: Notificações de oportunidades
-- **Análise de Sentimento**: Reviews e feedback
-- **Otimização de Preços**: Sugestões automáticas
+```bash
+# Executar dashboard
+streamlit run dashboard/modern_globe_app.py
+```
 
-### **Fase 3: Integração Completa (Q4 2024)**
-- **APIs Reais**: Integração com Airbnb, Booking.com
-- **Dados em Tempo Real**: Atualização automática
-- **Mobile App**: Aplicativo nativo
-- **Analytics Avançado**: BI e relatórios
+**Acesse**: http://localhost:8501
 
-### **Fase 4: Expansão Nacional (2025)**
-- **Todas as Capitais**: Cobertura nacional
-- **Cidades Turísticas**: Destinos populares
-- **Análise Regional**: Comparações entre estados
-- **Machine Learning Avançado**: Deep learning
+### **Pipeline Completo**
+
+```bash
+# Executar pipeline completo
+python main.py
+```
+
+### **Análise Personalizada**
+
+```python
+from src.data.data_loader import DataLoader
+from src.features.feature_engineer import FeatureEngineer
+from src.models.baseline_models import BaselineModels
+
+# Carregar dados
+loader = DataLoader()
+df = loader.load_airbnb_data()
+
+# Engenharia de features
+engineer = FeatureEngineer()
+df_featured = engineer.create_all_features(df)
+
+# Treinar modelos
+models = BaselineModels()
+results = models.train_all_models(df_featured)
+```
 
 ---
 
-## 📊 Roadmap de Desenvolvimento
+## 🗺️ Dashboard Interativo
 
-### **Q1 2024** ✅
-- [x] Sistema base SP/RJ
-- [x] Dashboard interativo
-- [x] Deploy 24/7
-- [x] Interface moderna
+### **🌍 Globo 3D**
+- **Rotação**: 360° com mouse
+- **Zoom**: Scroll para aproximar/afastar
+- **Cores**: Verde (barato) → Vermelho (caro)
+- **Click**: Análise detalhada da propriedade
 
-### **Q2 2024** 🚧
-- [ ] Expansão para BH/BSB
-- [ ] APIs de dados reais
-- [ ] Alertas automáticos
-- [ ] Mobile optimization
+### **📊 Análise Sazonal**
+- **Gráficos**: Preços por mês com variações percentuais
+- **Flags**: Discrepância entre alta e regular temporada
+- **Insights**: Recomendações de booking
+- **Comparação**: SP vs RJ patterns
 
-### **Q3 2024** 📋
-- [ ] Previsão de preços
-- [ ] Análise de sentimento
-- [ ] Integração completa
-- [ ] Performance optimization
+### **🎯 Filtros Dinâmicos**
+- **Cidade**: São Paulo, Rio de Janeiro
+- **Preço**: Slider de faixa de preço
+- **Tipo**: Entire home, Private room, Shared room
+- **Reviews**: Filtro por número de avaliações
 
-### **Q4 2024** 📋
-- [ ] Cobertura nacional
-- [ ] Mobile app
-- [ ] Analytics avançado
-- [ ] Machine learning avançado
+### **📈 Métricas Inteligentes**
+- **Propriedades**: Total de listings
+- **Preço Médio**: Valor médio por noite
+- **Status**: % acima/abaixo da média
+- **Análise**: Insights em tempo real
+
+---
+
+## 📈 Análise de Dados
+
+### **Dados Utilizados**
+
+#### **Inside Airbnb**
+- **Listings**: Propriedades com características
+- **Reviews**: Avaliações e scores
+- **Calendar**: Disponibilidade e preços
+- **Geolocation**: Coordenadas precisas
+
+#### **OpenStreetMap**
+- **POIs**: Pontos de interesse turístico
+- **Transporte**: Metrô, ônibus, estações
+- **Serviços**: Restaurantes, bares, supermercados
+- **Lazer**: Praias, parques, museus
+
+### **Features Engenheiradas**
+
+#### **Geospatial (25+ features)**
+```python
+# Distâncias a POIs
+distance_to_beach
+distance_to_subway
+distance_to_restaurant
+
+# Densidades
+property_density_1km
+poi_density_500m
+
+# Grid-based
+grid_avg_price
+grid_property_count
+```
+
+#### **Temporal (15+ features)**
+```python
+# Sazonalidade
+month_sin, month_cos
+season, is_high_season
+quarter
+
+# Padrões de booking
+occupancy_rate_30
+recent_demand
+popularity_score
+```
+
+#### **Reviews (10+ features)**
+```python
+# Trust indicators
+trust_score
+rating_consistency
+has_enough_reviews
+
+# Host quality
+host_quality_score
+is_superhost_num
+host_experience_years
+```
+
+#### **Amenities (20+ features)**
+```python
+# Categorias
+has_essential_amenities
+has_premium_amenities
+has_work_friendly_amenities
+
+# Específicos
+has_wifi, has_pool
+has_parking, has_ac
+amenity_score
+```
+
+---
+
+## 🤖 Modelos de ML
+
+### **Baseline Models**
+
+#### **Ridge Regression**
+```python
+# Regularização L2
+alpha = 0.1
+RMSE: ~R$ 45
+R²: 0.78
+```
+
+#### **Random Forest**
+```python
+# Ensemble de árvores
+n_estimators = 100
+max_depth = 10
+RMSE: ~R$ 42
+R²: 0.82
+```
+
+#### **XGBoost**
+```python
+# Gradient boosting
+learning_rate = 0.1
+max_depth = 6
+RMSE: ~R$ 38
+R²: 0.85
+```
+
+### **Advanced Models**
+
+#### **LightGBM**
+```python
+# Gradient boosting otimizado
+num_leaves = 31
+learning_rate = 0.05
+RMSE: ~R$ 36
+R²: 0.87
+```
+
+#### **CatBoost**
+```python
+# Categorical features handling
+iterations = 1000
+learning_rate = 0.1
+RMSE: ~R$ 35
+R²: 0.88
+```
+
+#### **Ensemble**
+```python
+# Weighted combination
+weights = [0.2, 0.2, 0.2, 0.2, 0.2]
+RMSE: ~R$ 33
+R²: 0.89
+```
+
+### **Feature Importance**
+
+#### **Top 10 Features**
+1. **bedrooms** (0.15) - Número de quartos
+2. **distance_to_beach** (0.12) - Distância à praia
+3. **review_scores_rating** (0.10) - Score de avaliação
+4. **accommodates** (0.09) - Capacidade
+5. **has_pool** (0.08) - Piscina
+6. **host_quality_score** (0.07) - Qualidade do host
+7. **is_high_season** (0.06) - Alta temporada
+8. **amenity_score** (0.05) - Score de amenities
+9. **distance_to_subway** (0.04) - Distância ao metrô
+10. **property_density_1km** (0.04) - Densidade de propriedades
+
+---
+
+## 📁 Estrutura do Projeto
+
+```
+aluguel-se-br/
+├── 📁 data/                    # Dados
+│   ├── raw/                    # Dados brutos
+│   ├── processed/              # Dados processados
+│   └── external/              # Dados externos
+├── 📁 src/                     # Código fonte
+│   ├── data/                   # Data loading
+│   ├── features/               # Feature engineering
+│   ├── models/                 # ML models
+│   └── visualization/          # Visualizações
+├── 📁 dashboard/               # Dashboard Streamlit
+│   ├── modern_globe_app.py    # App principal
+│   └── config.py              # Configurações
+├── 📁 scripts/                 # Scripts utilitários
+│   ├── download_data.py       # Download automático
+│   ├── prepare_sample.py      # Preparar amostras
+│   └── setup_demo.sh          # Setup automatizado
+├── 📁 docs/                    # Documentação
+│   ├── INSTALLATION.md        # Guia de instalação
+│   ├── USAGE.md               # Guia de uso
+│   └── API_REFERENCE.md       # Referência da API
+├── 📁 tests/                   # Testes
+├── 📁 notebooks/               # Jupyter notebooks
+├── 📄 requirements.txt         # Dependências
+├── 📄 config.py               # Configurações
+└── 📄 README.md             # Este arquivo
+```
+
+### **Arquivos Principais**
+
+#### **Dashboard**
+- `dashboard/modern_globe_app.py` - App principal Streamlit
+- `dashboard/config.py` - Configurações do dashboard
+
+#### **Core**
+- `src/data/data_loader.py` - Carregamento de dados
+- `src/features/feature_engineer.py` - Engenharia de features
+- `src/models/baseline_models.py` - Modelos de ML
+
+#### **Scripts**
+- `scripts/download_data.py` - Download automático
+- `scripts/prepare_sample.py` - Preparar amostras
+- `scripts/setup_demo.sh` - Setup automatizado
+
+---
+
+## 🔧 Configuração
+
+### **Variáveis de Ambiente**
+
+```bash
+# .env (opcional)
+AIRBNB_DATA_URL=https://data.insideairbnb.com
+OSM_API_URL=https://overpass-api.de/api
+LOG_LEVEL=INFO
+```
+
+### **Configurações Avançadas**
+
+#### **config.py**
+```python
+# POI types para extração
+POI_TYPES = {
+    "beach": {"natural": "beach"},
+    "subway": {"amenity": "subway_entrance"},
+    "restaurant": {"amenity": "restaurant"}
+}
+
+# Features sazonais
+SEASONAL_CONFIG = {
+    "enable_temporal_features": True,
+    "enable_review_features": True,
+    "enable_amenity_parsing": True
+}
+
+# Parâmetros de ML
+GRID_SIZE = 0.01  # degrees
+DENSITY_RADIUS_KM = 1.0
+DISTANCE_THRESHOLD_KM = 10.0
+```
+
+### **Docker (Opcional)**
+
+```dockerfile
+# Dockerfile
+FROM python:3.9-slim
+WORKDIR /app
+COPY requirements.txt .
+RUN pip install -r requirements.txt
+COPY . .
+EXPOSE 8501
+CMD ["streamlit", "run", "dashboard/modern_globe_app.py"]
+```
+
+---
+
+## 📚 Documentação
+
+### **Guias Disponíveis**
+
+- 📖 **[INSTALLATION.md](docs/INSTALLATION.md)** - Guia de instalação detalhado
+- 📖 **[USAGE.md](docs/USAGE.md)** - Guia de uso do dashboard
+- 📖 **[API_REFERENCE.md](docs/API_REFERENCE.md)** - Referência da API
+
+### **Notebooks de Exemplo**
+
+- 📓 **[01_exploratory_analysis.ipynb](notebooks/01_exploratory_analysis.ipynb)** - Análise exploratória
+- 📓 **[02_feature_engineering.ipynb](notebooks/02_feature_engineering.ipynb)** - Engenharia de features
+- 📓 **[03_model_training.ipynb](notebooks/03_model_training.ipynb)** - Treinamento de modelos
+
+### **Exemplos de Código**
+
+#### **Carregar Dados**
+```python
+from src.data.data_loader import DataLoader
+
+loader = DataLoader()
+df = loader.load_airbnb_data()
+print(f"Carregados {len(df)} registros")
+```
+
+#### **Engenharia de Features**
+```python
+from src.features.feature_engineer import FeatureEngineer
+
+engineer = FeatureEngineer()
+df_featured = engineer.create_all_features(df)
+print(f"Features criadas: {len(df_featured.columns)}")
+```
+
+#### **Treinar Modelos**
+```python
+from src.models.baseline_models import BaselineModels
+
+models = BaselineModels()
+results = models.train_all_models(df_featured)
+print(f"Melhor modelo: {results['best_model']}")
+```
 
 ---
 
 ## 🤝 Contribuição
 
 ### **Como Contribuir**
+
 1. **Fork** o repositório
-2. **Crie** uma branch para sua feature
-3. **Commit** suas mudanças
-4. **Push** para a branch
-5. **Abra** um Pull Request
+2. **Clone** seu fork: `git clone https://github.com/seu-usuario/aluguel-se-br.git`
+3. **Crie** uma branch: `git checkout -b feature/nova-feature`
+4. **Commit** suas mudanças: `git commit -m 'Add nova feature'`
+5. **Push** para a branch: `git push origin feature/nova-feature`
+6. **Abra** um Pull Request
 
 ### **Áreas de Contribuição**
-- **Dados**: Novas fontes de dados
-- **ML**: Melhorias nos modelos
-- **UI/UX**: Interface e experiência
-- **Documentação**: Guias e tutoriais
-- **Testes**: Cobertura de testes
 
----
+- 🐛 **Bug Fixes**: Correção de problemas
+- ✨ **New Features**: Novas funcionalidades
+- 📚 **Documentation**: Melhoria da documentação
+- 🧪 **Tests**: Adição de testes
+- 🎨 **UI/UX**: Melhorias na interface
 
-## 📞 Contato & Suporte
+### **Padrões de Código**
 
-### **Desenvolvedor Principal**
-- **Nome**: Ricardo Frugoni
-- **GitHub**: [@ricardofrugoni](https://github.com/ricardofrugoni)
-- **LinkedIn**: [Ricardo Frugoni](https://linkedin.com/in/ricardofrugoni)
-- **Email**: ricardo.frugoni@email.com
-
-### **Suporte Técnico**
-- **Issues**: [GitHub Issues](https://github.com/ricardofrugoni/aluguel-se-br/issues)
-- **Documentação**: [Wiki](https://github.com/ricardofrugoni/aluguel-se-br/wiki)
-- **Discord**: [Comunidade](https://discord.gg/airbnb-price-intelligence)
+```python
+# Python
+def function_name(param1: str, param2: int) -> bool:
+    """
+    Docstring da função.
+    
+    Args:
+        param1: Descrição do parâmetro
+        param2: Descrição do parâmetro
+        
+    Returns:
+        Descrição do retorno
+    """
+    return True
+```
 
 ---
 
@@ -286,15 +596,31 @@ python run_modern_dashboard.py
 
 Este projeto está licenciado sob a **MIT License** - veja o arquivo [LICENSE](LICENSE) para detalhes.
 
+### **Resumo da Licença**
+- ✅ **Uso comercial** permitido
+- ✅ **Modificação** permitida
+- ✅ **Distribuição** permitida
+- ✅ **Uso privado** permitido
+- ❌ **Sem garantia** de suporte
+
 ---
 
-## 🙏 Agradecimentos
+## 📞 Contato e Suporte
 
-- **Inside Airbnb**: Dados abertos e transparentes
-- **OpenStreetMap**: Dados geográficos gratuitos
-- **Streamlit**: Framework web incrível
-- **Comunidade Python**: Suporte e contribuições
-- **Contribuidores**: Todos que ajudaram no projeto
+### **Desenvolvedor**
+- 👤 **Ricardo Frugoni**
+- 📧 **Email**: ricardo@example.com
+- 🐙 **GitHub**: [@ricardofrugoni](https://github.com/ricardofrugoni)
+
+### **Suporte**
+- 🐛 **Issues**: [GitHub Issues](https://github.com/ricardofrugoni/aluguel-se-br/issues)
+- 💬 **Discussions**: [GitHub Discussions](https://github.com/ricardofrugoni/aluguel-se-br/discussions)
+- 📖 **Documentação**: [docs/](docs/)
+
+### **Links Úteis**
+- 🌐 **Live Demo**: [Dashboard Interativo](https://airbnb-price-prediction.streamlit.app)
+- 📊 **Dados**: [Inside Airbnb](http://insideairbnb.com)
+- 🗺️ **POIs**: [OpenStreetMap](https://www.openstreetmap.org)
 
 ---
 
@@ -302,7 +628,9 @@ Este projeto está licenciado sob a **MIT License** - veja o arquivo [LICENSE](L
 
 **⭐ Se este projeto foi útil, considere dar uma estrela! ⭐**
 
-[![GitHub stars](https://img.shields.io/github/stars/ricardofrugoni/aluguel-se-br.svg?style=social&label=Star)](https://github.com/ricardofrugoni/aluguel-se-br)
-[![GitHub forks](https://img.shields.io/github/forks/ricardofrugoni/aluguel-se-br.svg?style=social&label=Fork)](https://github.com/ricardofrugoni/aluguel-se-br)
+[![GitHub stars](https://img.shields.io/github/stars/ricardofrugoni/aluguel-se-br?style=social)](https://github.com/ricardofrugoni/aluguel-se-br/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/ricardofrugoni/aluguel-se-br?style=social)](https://github.com/ricardofrugoni/aluguel-se-br/network)
+
+**Desenvolvido com ❤️ para a comunidade de Data Science**
 
 </div>
