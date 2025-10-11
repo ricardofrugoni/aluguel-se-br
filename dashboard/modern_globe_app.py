@@ -133,41 +133,60 @@ st.markdown("""
         background-color: #f8f9fa !important;
     }
     
-    /* Fundo claro original */
+    /* Fundo escuro para melhor legibilidade */
     .stApp {
-        background: #ffffff !important;
-        background-color: #ffffff !important;
+        background: #1e1e1e !important;
+        background-color: #1e1e1e !important;
+        color: #ffffff !important;
     }
     
     .stApp * {
-        background: transparent !important;
-        background-color: transparent !important;
+        color: #ffffff !important;
     }
     
     .stApp > div {
-        background: #ffffff !important;
-        background-color: #ffffff !important;
+        background: #1e1e1e !important;
+        background-color: #1e1e1e !important;
     }
     
     .stApp > div * {
-        background: transparent !important;
-        background-color: transparent !important;
+        color: #ffffff !important;
     }
     
     .stApp > div > div {
-        background: #ffffff !important;
-        background-color: #ffffff !important;
+        background: #1e1e1e !important;
+        background-color: #1e1e1e !important;
     }
     
     .stApp > div > div * {
-        background: transparent !important;
-        background-color: transparent !important;
+        color: #ffffff !important;
     }
     
-    /* Fundo claro no body */
+    /* Fundo escuro no body */
     body {
-        background: #ffffff !important;
-        background-color: #ffffff !important;
+        background: #1e1e1e !important;
+        background-color: #1e1e1e !important;
+        color: #ffffff !important;
+    }
+    
+    /* Títulos e textos */
+    h1, h2, h3, h4, h5, h6 {
+        color: #ffffff !important;
+    }
+    
+    p, div, span {
+        color: #ffffff !important;
+    }
+    
+    /* Sidebar */
+    .css-1d391kg {
+        background-color: #2d2d2d !important;
+    }
+    
+    /* Containers */
+    .stContainer {
+        background-color: #2d2d2d !important;
+        border: 1px solid #444444 !important;
     }
     
     /* Forçar fundo cinza em todos os elementos */
@@ -833,8 +852,8 @@ def main():
     # Header moderno
     st.markdown("""
     <div class="main-header">
-        <h1>🏠 Airbnb Price Intelligence</h1>
-        <p>Análise Inteligente de Preços - São Paulo & Rio de Janeiro</p>
+        <h1 style="color: #ffffff;">🏠 Airbnb Price Intelligence</h1>
+        <p style="color: #cccccc;">Análise Inteligente de Preços - São Paulo & Rio de Janeiro</p>
     </div>
     """, unsafe_allow_html=True)
     
@@ -872,25 +891,25 @@ def main():
     
     st.markdown(f"""
     <div style="display: flex; gap: 8px; margin: 5px 0;">
-        <div style="background: #f8f9fa; padding: 1rem; border-radius: 8px; flex: 1; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+        <div style="background: #2d2d2d; padding: 1rem; border-radius: 8px; flex: 1; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.3); border: 1px solid #444444;">
             <div style="font-size: 2rem; margin-bottom: 0.5rem;">🏠</div>
-            <div style="font-size: 1.5rem; font-weight: bold; color: #2c3e50;">{len(filtered_df):,}</div>
-            <div style="font-size: 0.9rem; color: #666;">Propriedades</div>
+            <div style="font-size: 1.5rem; font-weight: bold; color: #ffffff;">{len(filtered_df):,}</div>
+            <div style="font-size: 0.9rem; color: #cccccc;">Propriedades</div>
         </div>
-        <div style="background: #f8f9fa; padding: 1rem; border-radius: 8px; flex: 1; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+        <div style="background: #2d2d2d; padding: 1rem; border-radius: 8px; flex: 1; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.3); border: 1px solid #444444;">
             <div style="font-size: 2rem; margin-bottom: 0.5rem;">💰</div>
-            <div style="font-size: 1.5rem; font-weight: bold; color: #2c3e50;">R$ {avg_price:.0f}</div>
-            <div style="font-size: 0.9rem; color: #666;">Preço Médio</div>
+            <div style="font-size: 1.5rem; font-weight: bold; color: #ffffff;">R$ {avg_price:.0f}</div>
+            <div style="font-size: 0.9rem; color: #cccccc;">Preço Médio</div>
         </div>
-        <div style="background: #f8f9fa; padding: 1rem; border-radius: 8px; flex: 1; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+        <div style="background: #2d2d2d; padding: 1rem; border-radius: 8px; flex: 1; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.3); border: 1px solid #444444;">
             <div style="font-size: 2rem; margin-bottom: 0.5rem;">📈</div>
-            <div style="font-size: 1.5rem; font-weight: bold; color: #2c3e50;">{high_price_pct:.1f}%</div>
-            <div style="font-size: 0.9rem; color: #666;">Acima da Média</div>
+            <div style="font-size: 1.5rem; font-weight: bold; color: #ffffff;">{high_price_pct:.1f}%</div>
+            <div style="font-size: 0.9rem; color: #cccccc;">Acima da Média</div>
         </div>
-        <div style="background: #f8f9fa; padding: 1rem; border-radius: 8px; flex: 1; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+        <div style="background: #2d2d2d; padding: 1rem; border-radius: 8px; flex: 1; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.3); border: 1px solid #444444;">
             <div style="font-size: 2rem; margin-bottom: 0.5rem;">📉</div>
-            <div style="font-size: 1.5rem; font-weight: bold; color: #2c3e50;">{low_price_pct:.1f}%</div>
-            <div style="font-size: 0.9rem; color: #666;">Abaixo da Média</div>
+            <div style="font-size: 1.5rem; font-weight: bold; color: #ffffff;">{low_price_pct:.1f}%</div>
+            <div style="font-size: 0.9rem; color: #cccccc;">Abaixo da Média</div>
         </div>
     </div>
     """, unsafe_allow_html=True)
