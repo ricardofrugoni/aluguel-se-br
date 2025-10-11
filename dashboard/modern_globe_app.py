@@ -27,26 +27,29 @@ st.markdown("""
     }
     
     .main-header {
-        background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
-        color: white;
-        padding: 2rem;
-        border-radius: 15px;
+        background: #4a4a4a !important;
+        color: #ffffff !important;
+        padding: 1.5rem;
+        border-radius: 8px;
         text-align: center;
-        margin-bottom: 2rem;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        margin-bottom: 1.5rem;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        border: 1px solid #666666;
     }
     
     .main-header h1 {
-        font-size: 3rem;
-        font-weight: 700;
+        font-size: 2rem;
+        font-weight: 600;
         margin: 0;
-        text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        color: #ffffff !important;
+        text-shadow: none;
     }
     
     .main-header p {
-        font-size: 1.2rem;
+        font-size: 1rem;
         margin: 0.5rem 0 0 0;
-        opacity: 0.9;
+        color: #cccccc !important;
+        opacity: 1;
     }
     
     /* Cards modernos */
@@ -865,9 +868,9 @@ def main():
     """
     # Header moderno
     st.markdown("""
-    <div class="main-header">
-        <h1 style="color: #ffffff;">🏠 Airbnb Price Intelligence</h1>
-        <p style="color: #cccccc;">Análise Inteligente de Preços - São Paulo & Rio de Janeiro</p>
+    <div class="main-header" style="background: #4a4a4a !important; color: #ffffff !important; border: 1px solid #666666;">
+        <h1 style="color: #ffffff !important; font-size: 2rem; font-weight: 600; margin: 0;">🏠 Airbnb Price Intelligence</h1>
+        <p style="color: #cccccc !important; font-size: 1rem; margin: 0.5rem 0 0 0;">Análise Inteligente de Preços - São Paulo & Rio de Janeiro</p>
     </div>
     """, unsafe_allow_html=True)
     
