@@ -133,14 +133,53 @@ st.markdown("""
         background-color: #f8f9fa !important;
     }
     
-    /* Forçar fundo cinza no header do Airbnb */
-    .stApp > header {
+    /* Forçar fundo cinza no header do Airbnb - MAIS AGRESSIVO */
+    .stApp > header,
+    .stApp > header *,
+    .stApp > header > div,
+    .stApp > header > div *,
+    .stApp > header > div > div,
+    .stApp > header > div > div * {
+        background: #f8f9fa !important;
+        background-color: #f8f9fa !important;
+    }
+    
+    /* Forçar fundo cinza em TODOS os elementos */
+    .stApp,
+    .stApp *,
+    .stApp > div,
+    .stApp > div *,
+    .stApp > div > div,
+    .stApp > div > div * {
+        background: #f8f9fa !important;
+        background-color: #f8f9fa !important;
+    }
+    
+    /* Forçar fundo cinza no body */
+    body {
+        background: #f8f9fa !important;
+        background-color: #f8f9fa !important;
+    }
+    
+    /* Forçar fundo cinza no header específico do Airbnb */
+    .stApp > header[data-testid="stHeader"] {
         background: #f8f9fa !important;
         background-color: #f8f9fa !important;
     }
     
     /* Forçar fundo cinza em todos os elementos do header */
-    .stApp > header * {
+    .stApp > header[data-testid="stHeader"] * {
+        background: #f8f9fa !important;
+        background-color: #f8f9fa !important;
+    }
+    
+    /* Forçar fundo cinza em todos os elementos do app */
+    .stApp {
+        background: #f8f9fa !important;
+        background-color: #f8f9fa !important;
+    }
+    
+    .stApp * {
         background: #f8f9fa !important;
         background-color: #f8f9fa !important;
     }
