@@ -593,14 +593,11 @@ def create_modern_map(df, selected_city=None, selected_neighborhood=None, map_st
     else:
         center_lat, center_lon = -22.9068, -43.1729  # Iniciar no RJ por padrão
     
-    # Mapear estilos (apenas os que funcionam bem)
+    # Mapear estilos
     style_map = {
         "CartoDB Positron": "CartoDB positron",
         "OpenStreetMap": "OpenStreetMap", 
-        "CartoDB Dark": "CartoDB dark_matter",
-        "Stamen Terrain": "Stamen Terrain",
-        "Stamen Toner": "Stamen Toner",
-        "Stamen Watercolor": "Stamen Watercolor"
+        "CartoDB Dark": "CartoDB dark_matter"
     }
     
     # Criar mapa com configurações otimizadas
@@ -640,30 +637,6 @@ def create_modern_map(df, selected_city=None, selected_neighborhood=None, map_st
         name='CartoDB Dark',
         overlay=False,
         control=True
-    ).add_to(m)
-    
-    folium.TileLayer(
-        tiles='Stamen Terrain',
-        name='Stamen Terrain',
-        overlay=False,
-        control=True,
-        attr='Map tiles by Stamen Design, under CC BY 3.0. Data by OpenStreetMap, under ODbL.'
-    ).add_to(m)
-    
-    folium.TileLayer(
-        tiles='Stamen Toner',
-        name='Stamen Toner',
-        overlay=False,
-        control=True,
-        attr='Map tiles by Stamen Design, under CC BY 3.0. Data by OpenStreetMap, under ODbL.'
-    ).add_to(m)
-    
-    folium.TileLayer(
-        tiles='Stamen Watercolor',
-        name='Stamen Watercolor',
-        overlay=False,
-        control=True,
-        attr='Map tiles by Stamen Design, under CC BY 3.0. Data by OpenStreetMap, under ODbL.'
     ).add_to(m)
     
     # Adicionar controle de camadas
@@ -820,21 +793,11 @@ def main():
     # Mapa interativo - PRINCIPAL
     st.markdown("## 🗺️ Mapa Inteligente")
     
-    # Opções do mapa no canto superior esquerdo
-    col1, col2 = st.columns([1, 3])
-    
-    with col1:
-        map_style = st.selectbox(
-            "🗺️ Estilo do Mapa",
-            [
-                "CartoDB Positron", 
-                "OpenStreetMap", 
-                "CartoDB Dark",
-                "Stamen Terrain",
-                "Stamen Toner",
-                "Stamen Watercolor"
-            ]
-        )
+    # Opções do mapa acima do mapa
+    map_style = st.selectbox(
+        "🗺️ Tipo de Mapa",
+        ["CartoDB Positron", "OpenStreetMap", "CartoDB Dark"]
+    )
     
     st.markdown("**💡 Dica**: Use o scroll do mouse para zoom. Cores indicam status do preço: 🔴 Alto, 🟡 Baixo, 🟢 Normal")
     
