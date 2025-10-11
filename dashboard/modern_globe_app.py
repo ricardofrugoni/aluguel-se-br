@@ -593,17 +593,14 @@ def create_modern_map(df, selected_city=None, selected_neighborhood=None, map_st
     else:
         center_lat, center_lon = -22.9068, -43.1729  # Iniciar no RJ por padrão
     
-    # Mapear estilos
+    # Mapear estilos (apenas os que funcionam bem)
     style_map = {
         "CartoDB Positron": "CartoDB positron",
         "OpenStreetMap": "OpenStreetMap", 
         "CartoDB Dark": "CartoDB dark_matter",
         "Stamen Terrain": "Stamen Terrain",
         "Stamen Toner": "Stamen Toner",
-        "Stamen Watercolor": "Stamen Watercolor",
-        "Esri World Street Map": "https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}",
-        "Esri World Topographic": "https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}",
-        "Esri World Imagery": "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
+        "Stamen Watercolor": "Stamen Watercolor"
     }
     
     # Criar mapa com configurações otimizadas
@@ -623,7 +620,7 @@ def create_modern_map(df, selected_city=None, selected_neighborhood=None, map_st
         min_zoom=8
     )
     
-    # Adicionar todas as camadas de tiles
+    # Adicionar camadas de tiles alternativas
     folium.TileLayer(
         tiles='OpenStreetMap',
         name='OpenStreetMap',
@@ -664,31 +661,6 @@ def create_modern_map(df, selected_city=None, selected_neighborhood=None, map_st
         name='Stamen Watercolor',
         overlay=False,
         control=True
-    ).add_to(m)
-    
-    # Adicionar camadas Esri
-    folium.TileLayer(
-        tiles='https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}',
-        name='Esri World Street Map',
-        overlay=False,
-        control=True,
-        attr='Esri'
-    ).add_to(m)
-    
-    folium.TileLayer(
-        tiles='https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}',
-        name='Esri World Topographic',
-        overlay=False,
-        control=True,
-        attr='Esri'
-    ).add_to(m)
-    
-    folium.TileLayer(
-        tiles='https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
-        name='Esri World Imagery',
-        overlay=False,
-        control=True,
-        attr='Esri'
     ).add_to(m)
     
     # Adicionar controle de camadas
@@ -857,10 +829,7 @@ def main():
                 "CartoDB Dark",
                 "Stamen Terrain",
                 "Stamen Toner",
-                "Stamen Watercolor",
-                "Esri World Street Map",
-                "Esri World Topographic",
-                "Esri World Imagery"
+                "Stamen Watercolor"
             ]
         )
     
