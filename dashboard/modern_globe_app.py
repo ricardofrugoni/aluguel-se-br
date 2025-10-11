@@ -51,7 +51,7 @@ st.markdown("""
     
     /* Cards modernos */
     .metric-card {
-        background: white;
+        background: #f8f9fa;
         padding: 1.5rem;
         border-radius: 15px;
         box-shadow: 0 5px 15px rgba(0,0,0,0.08);
@@ -95,7 +95,7 @@ st.markdown("""
     
     /* Property cards */
     .property-card {
-        background: white;
+        background: #f8f9fa;
         border-radius: 12px;
         padding: 1.5rem;
         margin: 1rem 0;
@@ -575,9 +575,9 @@ def load_airbnb_historical_data():
     
     return pd.DataFrame(data)
 
-def create_modern_map(df, selected_city=None, selected_neighborhood=None):
+def create_modern_map(df, selected_city=None, selected_neighborhood=None, map_style="CartoDB Positron", zoom_level=12, marker_size=10):
     """
-    Cria mapa Folium moderno com scroll funcional
+    Cria mapa Folium moderno com scroll funcional e opções personalizáveis
     """
     # Filtrar dados se necessário
     if selected_city:
@@ -593,11 +593,18 @@ def create_modern_map(df, selected_city=None, selected_neighborhood=None):
     else:
         center_lat, center_lon = -22.9068, -43.1729  # Iniciar no RJ por padrão
     
+    # Mapear estilos
+    style_map = {
+        "CartoDB Positron": "CartoDB positron",
+        "OpenStreetMap": "OpenStreetMap", 
+        "CartoDB Dark": "CartoDB dark_matter"
+    }
+    
     # Criar mapa com configurações otimizadas
     m = folium.Map(
         location=[center_lat, center_lon],
-        zoom_start=12,
-        tiles='CartoDB positron',
+        zoom_start=zoom_level,
+        tiles=style_map[map_style],
         prefer_canvas=False,
         zoom_control=True,
         scroll_wheel_zoom=True,
@@ -701,36 +708,6 @@ def create_modern_map(df, selected_city=None, selected_neighborhood=None):
     
     return m
 
-def create_price_analysis_chart(df):
-    """
-    Cria gráfico de análise de preços
-    """
-    # Preparar dados para o gráfico
-    price_data = df.groupby(['city', 'price_status']).size().reset_index(name='count')
-    
-    fig = px.bar(
-        price_data, 
-        x='city', 
-        y='count', 
-        color='price_status',
-        title='Distribuição de Status de Preços por Cidade',
-        color_discrete_map={
-            'high': '#e74c3c',
-            'normal': '#27ae60', 
-            'low': '#f39c12'
-        },
-        labels={'count': 'Número de Propriedades', 'city': 'Cidade'}
-    )
-    
-    fig.update_layout(
-        plot_bgcolor='white',
-        paper_bgcolor='white',
-        font=dict(size=12),
-        title_font_size=16,
-        showlegend=True
-    )
-    
-    return fig
 
 def main():
     """
@@ -762,6 +739,21 @@ def main():
         neighborhoods = ['Todos'] + sorted(df['neighborhood'].unique().tolist())
     
     selected_neighborhood = st.sidebar.selectbox("🏘️ Bairro", neighborhoods)
+    
+    # Opções do mapa
+    st.sidebar.markdown("## 🗺️ Opções do Mapa")
+    
+    # Estilo do mapa
+    map_style = st.sidebar.selectbox(
+        "🎨 Estilo do Mapa",
+        ["CartoDB Positron", "OpenStreetMap", "CartoDB Dark"]
+    )
+    
+    # Zoom inicial
+    zoom_level = st.sidebar.slider("🔍 Zoom Inicial", 8, 16, 12)
+    
+    # Tamanho dos marcadores
+    marker_size = st.sidebar.slider("📍 Tamanho dos Marcadores", 5, 20, 10)
     
     # Aplicar filtros
     filtered_df = df.copy()
@@ -833,8 +825,14 @@ def main():
         st.markdown("• 🟡 Abaixo da média")
     
     # Criar mapa moderno
-    folium_map = create_modern_map(filtered_df, selected_city if selected_city != 'Todos' else None, 
-                                  selected_neighborhood if selected_neighborhood != 'Todos' else None)
+    folium_map = create_modern_map(
+        filtered_df, 
+        selected_city if selected_city != 'Todos' else None, 
+        selected_neighborhood if selected_neighborhood != 'Todos' else None,
+        map_style,
+        zoom_level,
+        marker_size
+    )
     
     # Exibir mapa
     st.markdown('<div class="map-container">', unsafe_allow_html=True)
@@ -846,10 +844,6 @@ def main():
     )
     st.markdown('</div>', unsafe_allow_html=True)
     
-    # Gráfico de análise (movido para baixo do mapa)
-    st.markdown("## 📊 Análise de Preços")
-    chart = create_price_analysis_chart(filtered_df)
-    st.plotly_chart(chart, use_container_width=True)
     
     # Lista de propriedades
     st.markdown("## 📋 Propriedades na Área")
