@@ -133,23 +133,32 @@ st.markdown("""
         background-color: #f8f9fa !important;
     }
     
-    /* Forçar fundo cinza ESCURO no header do Airbnb - MAIS AGRESSIVO */
-    .stApp > header,
-    .stApp > header *,
-    .stApp > header > div,
-    .stApp > header > div *,
-    .stApp > header > div > div,
-    .stApp > header > div > div * {
+    /* Forçar fundo cinza ESCURO - SUPER AGRESSIVO */
+    .stApp {
         background: #2c3e50 !important;
         background-color: #2c3e50 !important;
     }
     
-    /* Forçar fundo cinza ESCURO em TODOS os elementos */
-    .stApp,
-    .stApp *,
-    .stApp > div,
-    .stApp > div *,
-    .stApp > div > div,
+    .stApp * {
+        background: #2c3e50 !important;
+        background-color: #2c3e50 !important;
+    }
+    
+    .stApp > div {
+        background: #2c3e50 !important;
+        background-color: #2c3e50 !important;
+    }
+    
+    .stApp > div * {
+        background: #2c3e50 !important;
+        background-color: #2c3e50 !important;
+    }
+    
+    .stApp > div > div {
+        background: #2c3e50 !important;
+        background-color: #2c3e50 !important;
+    }
+    
     .stApp > div > div * {
         background: #2c3e50 !important;
         background-color: #2c3e50 !important;
@@ -161,25 +170,8 @@ st.markdown("""
         background-color: #2c3e50 !important;
     }
     
-    /* Forçar fundo cinza ESCURO no header específico do Airbnb */
-    .stApp > header[data-testid="stHeader"] {
-        background: #2c3e50 !important;
-        background-color: #2c3e50 !important;
-    }
-    
-    /* Forçar fundo cinza ESCURO em todos os elementos do header */
-    .stApp > header[data-testid="stHeader"] * {
-        background: #2c3e50 !important;
-        background-color: #2c3e50 !important;
-    }
-    
-    /* Forçar fundo cinza ESCURO em todos os elementos do app */
-    .stApp {
-        background: #2c3e50 !important;
-        background-color: #2c3e50 !important;
-    }
-    
-    .stApp * {
+    /* Forçar fundo cinza ESCURO em TODOS os elementos */
+    * {
         background: #2c3e50 !important;
         background-color: #2c3e50 !important;
     }
