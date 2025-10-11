@@ -168,13 +168,22 @@ def create_globe_map(df, selected_city=None, selected_neighborhood=None, map_sty
             name=city
         ))
     
-    # Determinar centro baseado na cidade selecionada
-    if selected_city == 'São Paulo':
-        center_lat, center_lon = -23.5505, -46.6333
-    elif selected_city == 'Rio de Janeiro':
-        center_lat, center_lon = -22.9068, -43.1729
+    # Usar valores do session_state se disponíveis, senão usar padrões
+    if 'center_lat' in st.session_state and 'center_lon' in st.session_state:
+        center_lat = st.session_state.center_lat
+        center_lon = st.session_state.center_lon
     else:
-        center_lat, center_lon = -23.5, -45  # Centro entre SP e RJ
+        # Determinar centro baseado na cidade selecionada
+        if selected_city == 'São Paulo':
+            center_lat, center_lon = -23.5505, -46.6333
+        elif selected_city == 'Rio de Janeiro':
+            center_lat, center_lon = -22.9068, -43.1729
+        else:
+            center_lat, center_lon = -23.5, -45  # Centro entre SP e RJ
+    
+    # Usar zoom do session_state se disponível
+    if 'zoom_level' in st.session_state:
+        zoom_level = st.session_state.zoom_level
     
     # Configurar o layout do mapa
     fig.update_layout(
@@ -259,10 +268,24 @@ def main():
     col1, col2 = st.sidebar.columns(2)
     with col1:
         if st.button("🏙️ SP"):
-            zoom_level = 13
+            st.session_state.zoom_level = 13
+            st.session_state.center_lat = -23.5505
+            st.session_state.center_lon = -46.6333
     with col2:
         if st.button("🏖️ RJ"):
-            zoom_level = 13
+            st.session_state.zoom_level = 13
+            st.session_state.center_lat = -22.9068
+            st.session_state.center_lon = -43.1729
+    
+    # Botão para resetar
+    if st.sidebar.button("🔄 Resetar Mapa"):
+        if 'zoom_level' in st.session_state:
+            del st.session_state.zoom_level
+        if 'center_lat' in st.session_state:
+            del st.session_state.center_lat
+        if 'center_lon' in st.session_state:
+            del st.session_state.center_lon
+        st.rerun()
     
     # Zoom para bairros específicos
     if selected_city == 'São Paulo':
@@ -270,27 +293,43 @@ def main():
         col1, col2 = st.sidebar.columns(2)
         with col1:
             if st.button("Vila Madalena"):
-                zoom_level = 15
+                st.session_state.zoom_level = 15
+                st.session_state.center_lat = -23.5489
+                st.session_state.center_lon = -46.6320
             if st.button("Jardins"):
-                zoom_level = 15
+                st.session_state.zoom_level = 15
+                st.session_state.center_lat = -23.5475
+                st.session_state.center_lon = -46.6307
         with col2:
             if st.button("Pinheiros"):
-                zoom_level = 15
+                st.session_state.zoom_level = 15
+                st.session_state.center_lat = -23.5460
+                st.session_state.center_lon = -46.6294
             if st.button("Moema"):
-                zoom_level = 15
+                st.session_state.zoom_level = 15
+                st.session_state.center_lat = -23.5445
+                st.session_state.center_lon = -46.6281
     elif selected_city == 'Rio de Janeiro':
         st.sidebar.markdown("**🏖️ Bairros RJ:**")
         col1, col2 = st.sidebar.columns(2)
         with col1:
             if st.button("Copacabana"):
-                zoom_level = 15
+                st.session_state.zoom_level = 15
+                st.session_state.center_lat = -22.9048
+                st.session_state.center_lon = -43.1709
             if st.button("Ipanema"):
-                zoom_level = 15
+                st.session_state.zoom_level = 15
+                st.session_state.center_lat = -22.9028
+                st.session_state.center_lon = -43.1689
         with col2:
             if st.button("Leblon"):
-                zoom_level = 15
+                st.session_state.zoom_level = 15
+                st.session_state.center_lat = -22.9008
+                st.session_state.center_lon = -43.1669
             if st.button("Botafogo"):
-                zoom_level = 15
+                st.session_state.zoom_level = 15
+                st.session_state.center_lat = -22.8988
+                st.session_state.center_lon = -43.1649
     
     # Aplicar filtros
     filtered_df = df.copy()
