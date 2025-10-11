@@ -191,7 +191,7 @@ def load_airbnb_historical_data():
     """
     np.random.seed(42)
     
-    # Coordenadas reais de bairros do RJ (corrigidas para evitar mar)
+    # Coordenadas reais de bairros do RJ (corrigidas para evitar mar - mais para o interior)
     rj_neighborhoods = {
         'Copacabana': {'lat': -22.9707, 'lon': -43.1814},
         'Ipanema': {'lat': -22.9844, 'lon': -43.2014},
@@ -331,8 +331,8 @@ def load_airbnb_historical_data():
             data.append({
                 'city': 'Rio de Janeiro',
                 'neighborhood': neighborhood,
-                'latitude': coords['lat'] + np.random.uniform(-0.003, 0.003),
-                'longitude': coords['lon'] + np.random.uniform(-0.003, 0.003),
+                'latitude': coords['lat'] + np.random.uniform(-0.001, 0.002),
+                'longitude': coords['lon'] + np.random.uniform(0.001, 0.003),
                 'current_price': current_price,
                 'avg_price_12m': avg_price,
                 'price_std': std_price,
