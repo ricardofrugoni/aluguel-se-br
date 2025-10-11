@@ -742,41 +742,40 @@ def create_modern_map(df, selected_city=None, selected_neighborhood=None, map_st
         min_zoom=8
     )
     
-    # Forçar o estilo selecionado
+    # Forçar o estilo selecionado - CORRIGIDO
     if map_style == "Normal (Ruas)":
         m.tiles = "OpenStreetMap"
+        # Remover outras camadas e adicionar apenas OpenStreetMap
+        m._children.clear()
+        folium.TileLayer(
+            tiles='OpenStreetMap',
+            name='OpenStreetMap',
+            overlay=False,
+            attr='OpenStreetMap contributors'
+        ).add_to(m)
     elif map_style == "Google Maps":
         m.tiles = "CartoDB positron"
-    else:
+        # Remover outras camadas e adicionar apenas CartoDB positron
+        m._children.clear()
+        folium.TileLayer(
+            tiles='CartoDB positron',
+            name='CartoDB Positron',
+            overlay=False,
+            attr='CartoDB'
+        ).add_to(m)
+    else:  # Escuro (Dark)
         m.tiles = "CartoDB dark_matter"
+        # Remover outras camadas e adicionar apenas CartoDB dark
+        m._children.clear()
+        folium.TileLayer(
+            tiles='CartoDB dark_matter',
+            name='CartoDB Dark',
+            overlay=False,
+            attr='CartoDB'
+        ).add_to(m)
     
-    # Adicionar camadas de tiles alternativas
-    folium.TileLayer(
-        tiles='OpenStreetMap',
-        name='Normal (Ruas)',
-        overlay=False,
-        control=True,
-        attr='OpenStreetMap contributors'
-    ).add_to(m)
-    
-    folium.TileLayer(
-        tiles='CartoDB positron',
-        name='Google Maps',
-        overlay=False,
-        control=True,
-        attr='CartoDB'
-    ).add_to(m)
-    
-    folium.TileLayer(
-        tiles='CartoDB dark_matter',
-        name='Escuro (Dark)',
-        overlay=False,
-        control=True,
-        attr='CartoDB'
-    ).add_to(m)
-    
-    # Adicionar controle de camadas
-    folium.LayerControl().add_to(m)
+    # Adicionar controle de camadas (se necessário)
+    # folium.LayerControl().add_to(m)
     
     # Adicionar pontos para cada propriedade
     for idx, property in df.iterrows():
@@ -791,44 +790,44 @@ def create_modern_map(df, selected_city=None, selected_neighborhood=None, map_st
             color = 'green'
             icon = 'home'
         
-        # Criar popup moderno
+        # Criar popup moderno com fundo escuro
         popup_html = f"""
         <div style="width: 280px; font-family: 'Segoe UI', sans-serif;">
             <div style="background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%); color: white; padding: 15px; border-radius: 10px 10px 0 0; margin: -10px -10px 10px -10px;">
                 <h3 style="margin: 0; font-size: 1.2rem;">{property['neighborhood']}, {property['city']}</h3>
             </div>
-            <div style="padding: 10px;">
+            <div style="padding: 10px; background: #2d2d2d; border-radius: 0 0 10px 10px;">
                 <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
-                    <span style="font-weight: bold; color: #2c3e50;">💰 Preço Atual:</span>
-                    <span style="font-size: 1.2rem; font-weight: bold; color: #e74c3c;">R$ {property['current_price']:.0f}/noite</span>
+                    <span style="font-weight: bold; color: #ffffff;">💰 Preço Atual:</span>
+                    <span style="font-size: 1.2rem; font-weight: bold; color: #ff6b6b;">R$ {property['current_price']:.0f}/noite</span>
                 </div>
                 <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
-                    <span style="color: #7f8c8d;">📊 Média 12 meses:</span>
-                    <span style="font-weight: bold;">R$ {property['avg_price_12m']:.0f}</span>
+                    <span style="color: #cccccc;">📊 Média 12 meses:</span>
+                    <span style="font-weight: bold; color: #ffffff;">R$ {property['avg_price_12m']:.0f}</span>
                 </div>
                 <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
-                    <span style="color: #7f8c8d;">📈 Status:</span>
-                    <span style="font-weight: bold; color: {'#e74c3c' if property['price_status'] == 'high' else '#27ae60' if property['price_status'] == 'normal' else '#f39c12'};">{property['price_status'].upper()}</span>
+                    <span style="color: #cccccc;">📈 Status:</span>
+                    <span style="font-weight: bold; color: {'#ff6b6b' if property['price_status'] == 'high' else '#4ecdc4' if property['price_status'] == 'normal' else '#f9ca24'};">{property['price_status'].upper()}</span>
                 </div>
                 <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
-                    <span style="color: #7f8c8d;">📍 Endereço:</span>
-                    <span style="font-weight: bold; font-size: 0.9rem;">{property['address']}</span>
+                    <span style="color: #cccccc;">📍 Endereço:</span>
+                    <span style="font-weight: bold; font-size: 0.9rem; color: #ffffff;">{property['address']}</span>
                 </div>
                 <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
-                    <span style="color: #7f8c8d;">🏠 Tipo:</span>
-                    <span style="font-weight: bold;">{property['property_type']}</span>
+                    <span style="color: #cccccc;">🏠 Tipo:</span>
+                    <span style="font-weight: bold; color: #ffffff;">{property['property_type']}</span>
                 </div>
                 <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
-                    <span style="color: #7f8c8d;">🛏️ Quartos:</span>
-                    <span style="font-weight: bold;">{property['bedrooms']}</span>
+                    <span style="color: #cccccc;">🛏️ Quartos:</span>
+                    <span style="font-weight: bold; color: #ffffff;">{property['bedrooms']}</span>
                 </div>
                 <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
-                    <span style="color: #7f8c8d;">⭐ Avaliação:</span>
-                    <span style="font-weight: bold;">{property['review_scores_rating']:.1f}/100</span>
+                    <span style="color: #cccccc;">⭐ Avaliação:</span>
+                    <span style="font-weight: bold; color: #ffffff;">{property['review_scores_rating']:.1f}/100</span>
                 </div>
                 <div style="display: flex; justify-content: space-between;">
-                    <span style="color: #7f8c8d;">📝 Reviews:</span>
-                    <span style="font-weight: bold;">{property['number_of_reviews']}</span>
+                    <span style="color: #cccccc;">📝 Reviews:</span>
+                    <span style="font-weight: bold; color: #ffffff;">{property['number_of_reviews']}</span>
                 </div>
             </div>
         </div>
