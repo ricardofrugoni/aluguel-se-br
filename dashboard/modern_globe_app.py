@@ -133,6 +133,18 @@ st.markdown("""
         background-color: #f8f9fa !important;
     }
     
+    /* Forçar fundo cinza no header do Airbnb */
+    .stApp > header {
+        background: #f8f9fa !important;
+        background-color: #f8f9fa !important;
+    }
+    
+    /* Forçar fundo cinza em todos os elementos do header */
+    .stApp > header * {
+        background: #f8f9fa !important;
+        background-color: #f8f9fa !important;
+    }
+    
     /* Forçar fundo cinza em todos os elementos */
     div[data-testid="metric-container"], 
     div[data-testid="metric-container"] *, 
@@ -684,6 +696,12 @@ def create_modern_map(df, selected_city=None, selected_neighborhood=None, map_st
         max_zoom=18,
         min_zoom=8
     )
+    
+    # Forçar o estilo selecionado
+    if map_style == "Normal (Ruas)":
+        m.tiles = "CartoDB positron"
+    else:
+        m.tiles = "CartoDB dark_matter"
     
     # Adicionar camadas de tiles alternativas
     folium.TileLayer(
