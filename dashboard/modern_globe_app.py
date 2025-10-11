@@ -617,27 +617,70 @@ def create_modern_map(df, selected_city=None, selected_neighborhood=None, map_st
         min_zoom=8
     )
     
-    # Adicionar camadas de tiles
-    folium.TileLayer(
-        tiles='OpenStreetMap',
-        name='OpenStreetMap',
-        overlay=False,
-        control=True
-    ).add_to(m)
-    
-    folium.TileLayer(
-        tiles='CartoDB positron',
-        name='CartoDB Positron',
-        overlay=False,
-        control=True
-    ).add_to(m)
-    
-    folium.TileLayer(
-        tiles='CartoDB dark_matter',
-        name='CartoDB Dark',
-        overlay=False,
-        control=True
-    ).add_to(m)
+    # Adicionar camadas de tiles com estilos diferentes
+    if map_style == "OpenStreetMap":
+        folium.TileLayer(
+            tiles='OpenStreetMap',
+            name='OpenStreetMap',
+            overlay=False,
+            control=True
+        ).add_to(m)
+        
+        folium.TileLayer(
+            tiles='CartoDB positron',
+            name='CartoDB Positron',
+            overlay=False,
+            control=True
+        ).add_to(m)
+        
+        folium.TileLayer(
+            tiles='CartoDB dark_matter',
+            name='CartoDB Dark',
+            overlay=False,
+            control=True
+        ).add_to(m)
+    elif map_style == "CartoDB Dark":
+        folium.TileLayer(
+            tiles='CartoDB dark_matter',
+            name='CartoDB Dark',
+            overlay=False,
+            control=True
+        ).add_to(m)
+        
+        folium.TileLayer(
+            tiles='OpenStreetMap',
+            name='OpenStreetMap',
+            overlay=False,
+            control=True
+        ).add_to(m)
+        
+        folium.TileLayer(
+            tiles='CartoDB positron',
+            name='CartoDB Positron',
+            overlay=False,
+            control=True
+        ).add_to(m)
+    else:  # CartoDB Positron (padrão)
+        folium.TileLayer(
+            tiles='CartoDB positron',
+            name='CartoDB Positron',
+            overlay=False,
+            control=True
+        ).add_to(m)
+        
+        folium.TileLayer(
+            tiles='OpenStreetMap',
+            name='OpenStreetMap',
+            overlay=False,
+            control=True
+        ).add_to(m)
+        
+        folium.TileLayer(
+            tiles='CartoDB dark_matter',
+            name='CartoDB Dark',
+            overlay=False,
+            control=True
+        ).add_to(m)
     
     # Adicionar controle de camadas
     folium.LayerControl().add_to(m)
@@ -740,20 +783,6 @@ def main():
     
     selected_neighborhood = st.sidebar.selectbox("🏘️ Bairro", neighborhoods)
     
-    # Opções do mapa
-    st.sidebar.markdown("## 🗺️ Opções do Mapa")
-    
-    # Estilo do mapa
-    map_style = st.sidebar.selectbox(
-        "🎨 Estilo do Mapa",
-        ["CartoDB Positron", "OpenStreetMap", "CartoDB Dark"]
-    )
-    
-    # Zoom inicial
-    zoom_level = st.sidebar.slider("🔍 Zoom Inicial", 8, 16, 12)
-    
-    # Tamanho dos marcadores
-    marker_size = st.sidebar.slider("📍 Tamanho dos Marcadores", 5, 20, 10)
     
     # Aplicar filtros
     filtered_df = df.copy()
@@ -806,6 +835,22 @@ def main():
     
     # Mapa interativo - PRINCIPAL
     st.markdown("## 🗺️ Mapa Inteligente")
+    
+    # Opções do mapa acima do mapa
+    col1, col2, col3 = st.columns(3)
+    
+    with col1:
+        map_style = st.selectbox(
+            "🎨 Estilo do Mapa",
+            ["CartoDB Positron", "OpenStreetMap", "CartoDB Dark"]
+        )
+    
+    with col2:
+        zoom_level = st.slider("🔍 Zoom Inicial", 8, 16, 12)
+    
+    with col3:
+        marker_size = st.slider("📍 Tamanho dos Marcadores", 5, 20, 10)
+    
     st.markdown("**💡 Dica**: Use o scroll do mouse para zoom. Cores indicam status do preço: 🔴 Alto, 🟡 Baixo, 🟢 Normal")
     
     # Instruções de navegação
