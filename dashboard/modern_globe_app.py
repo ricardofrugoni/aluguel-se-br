@@ -708,6 +708,7 @@ def create_modern_map(df, selected_city=None, selected_neighborhood=None, map_st
     # Mapear estilos
     style_map = {
         "Normal (Ruas)": "OpenStreetMap",
+        "Google Maps": "CartoDB positron",
         "Escuro (Dark)": "CartoDB dark_matter"
     }
     
@@ -731,6 +732,8 @@ def create_modern_map(df, selected_city=None, selected_neighborhood=None, map_st
     # Forçar o estilo selecionado
     if map_style == "Normal (Ruas)":
         m.tiles = "OpenStreetMap"
+    elif map_style == "Google Maps":
+        m.tiles = "CartoDB positron"
     else:
         m.tiles = "CartoDB dark_matter"
     
@@ -738,6 +741,13 @@ def create_modern_map(df, selected_city=None, selected_neighborhood=None, map_st
     folium.TileLayer(
         tiles='OpenStreetMap',
         name='Normal (Ruas)',
+        overlay=False,
+        control=True
+    ).add_to(m)
+    
+    folium.TileLayer(
+        tiles='CartoDB positron',
+        name='Google Maps',
         overlay=False,
         control=True
     ).add_to(m)
@@ -899,7 +909,7 @@ def main():
     # Seletor de tipo de mapa logo acima do mapa
     map_style = st.selectbox(
         "🗺️ Tipo de Mapa",
-        ["Normal (Ruas)", "Escuro (Dark)"]
+        ["Normal (Ruas)", "Google Maps", "Escuro (Dark)"]
     )
     
     # Legenda de cores apenas
