@@ -93,20 +93,35 @@ st.markdown("""
         font-weight: 600;
     }
     
-    /* Property cards */
+    /* Property cards - Fundo escuro para consistência */
     .property-card {
-        background: #f8f9fa;
+        background: #2d2d2d !important;
         border-radius: 8px;
         padding: 1rem;
         margin: 0.5rem 0;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        box-shadow: 0 2px 8px rgba(0,0,0,0.3);
         border-left: 4px solid #3498db;
+        border: 1px solid #444444;
         transition: all 0.3s ease;
+        color: #ffffff !important;
     }
     
     .property-card:hover {
         transform: translateX(5px);
-        box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+        background: #3d3d3d !important;
+    }
+    
+    .property-card * {
+        color: #ffffff !important;
+    }
+    
+    .property-card h3, .property-card h4, .property-card h5 {
+        color: #ffffff !important;
+    }
+    
+    .property-card p, .property-card span, .property-card div {
+        color: #cccccc !important;
     }
     
     /* Containers compactos e cinza claro - FORÇADO */
@@ -961,14 +976,14 @@ def main():
             status_class = "status-normal"
         
         st.markdown(f"""
-        <div class="property-card">
-            <div class="property-title">{property['neighborhood']}, {property['city']}</div>
-            <div class="property-price">R$ {property['current_price']:.0f}/noite</div>
-            <div class="property-details">
-                📍 {property['address']}<br>
-                🏠 {property['property_type']} • {property['bedrooms']} quartos • {property['bathrooms']} banheiros<br>
-                ⭐ {property['review_scores_rating']:.1f}/100 • 📝 {property['number_of_reviews']} reviews<br>
-                <span class="{status_class}">{status_text}</span> • 📊 Média 12m: R$ {property['avg_price_12m']:.0f}
+        <div class="property-card" style="background: #2d2d2d !important; color: #ffffff !important; border: 1px solid #444444;">
+            <div class="property-title" style="color: #ffffff !important; font-weight: bold; font-size: 1.2rem; margin-bottom: 0.5rem;">{property['neighborhood']}, {property['city']}</div>
+            <div class="property-price" style="color: #ff6b6b !important; font-size: 1.5rem; font-weight: bold; margin-bottom: 0.8rem;">R$ {property['current_price']:.0f}/noite</div>
+            <div class="property-details" style="color: #cccccc !important; line-height: 1.6;">
+                📍 <span style="color: #ffffff !important;">{property['address']}</span><br>
+                🏠 <span style="color: #ffffff !important;">{property['property_type']}</span> • <span style="color: #ffffff !important;">{property['bedrooms']} quartos</span> • <span style="color: #ffffff !important;">{property['bathrooms']} banheiros</span><br>
+                ⭐ <span style="color: #ffffff !important;">{property['review_scores_rating']:.1f}/100</span> • 📝 <span style="color: #ffffff !important;">{property['number_of_reviews']} reviews</span><br>
+                <span class="{status_class}" style="font-weight: bold;">{status_text}</span> • 📊 Média 12m: <span style="color: #ffffff !important;">R$ {property['avg_price_12m']:.0f}</span>
             </div>
         </div>
         """, unsafe_allow_html=True)
