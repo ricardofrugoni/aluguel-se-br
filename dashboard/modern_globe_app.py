@@ -597,7 +597,13 @@ def create_modern_map(df, selected_city=None, selected_neighborhood=None, map_st
     style_map = {
         "CartoDB Positron": "CartoDB positron",
         "OpenStreetMap": "OpenStreetMap", 
-        "CartoDB Dark": "CartoDB dark_matter"
+        "CartoDB Dark": "CartoDB dark_matter",
+        "Stamen Terrain": "Stamen Terrain",
+        "Stamen Toner": "Stamen Toner",
+        "Stamen Watercolor": "Stamen Watercolor",
+        "Esri World Street Map": "https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}",
+        "Esri World Topographic": "https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}",
+        "Esri World Imagery": "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
     }
     
     # Criar mapa com configurações otimizadas
@@ -617,7 +623,7 @@ def create_modern_map(df, selected_city=None, selected_neighborhood=None, map_st
         min_zoom=8
     )
     
-    # Adicionar camadas de tiles alternativas
+    # Adicionar todas as camadas de tiles
     folium.TileLayer(
         tiles='OpenStreetMap',
         name='OpenStreetMap',
@@ -637,6 +643,52 @@ def create_modern_map(df, selected_city=None, selected_neighborhood=None, map_st
         name='CartoDB Dark',
         overlay=False,
         control=True
+    ).add_to(m)
+    
+    folium.TileLayer(
+        tiles='Stamen Terrain',
+        name='Stamen Terrain',
+        overlay=False,
+        control=True
+    ).add_to(m)
+    
+    folium.TileLayer(
+        tiles='Stamen Toner',
+        name='Stamen Toner',
+        overlay=False,
+        control=True
+    ).add_to(m)
+    
+    folium.TileLayer(
+        tiles='Stamen Watercolor',
+        name='Stamen Watercolor',
+        overlay=False,
+        control=True
+    ).add_to(m)
+    
+    # Adicionar camadas Esri
+    folium.TileLayer(
+        tiles='https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}',
+        name='Esri World Street Map',
+        overlay=False,
+        control=True,
+        attr='Esri'
+    ).add_to(m)
+    
+    folium.TileLayer(
+        tiles='https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}',
+        name='Esri World Topographic',
+        overlay=False,
+        control=True,
+        attr='Esri'
+    ).add_to(m)
+    
+    folium.TileLayer(
+        tiles='https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+        name='Esri World Imagery',
+        overlay=False,
+        control=True,
+        attr='Esri'
     ).add_to(m)
     
     # Adicionar controle de camadas
@@ -793,11 +845,24 @@ def main():
     # Mapa interativo - PRINCIPAL
     st.markdown("## 🗺️ Mapa Inteligente")
     
-    # Opções do mapa acima do mapa
-    map_style = st.selectbox(
-        "🗺️ Tipo de Mapa",
-        ["CartoDB Positron", "OpenStreetMap", "CartoDB Dark"]
-    )
+    # Opções do mapa no canto superior esquerdo
+    col1, col2 = st.columns([1, 3])
+    
+    with col1:
+        map_style = st.selectbox(
+            "🗺️ Estilo do Mapa",
+            [
+                "CartoDB Positron", 
+                "OpenStreetMap", 
+                "CartoDB Dark",
+                "Stamen Terrain",
+                "Stamen Toner",
+                "Stamen Watercolor",
+                "Esri World Street Map",
+                "Esri World Topographic",
+                "Esri World Imagery"
+            ]
+        )
     
     st.markdown("**💡 Dica**: Use o scroll do mouse para zoom. Cores indicam status do preço: 🔴 Alto, 🟡 Baixo, 🟢 Normal")
     
