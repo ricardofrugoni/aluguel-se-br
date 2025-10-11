@@ -664,7 +664,7 @@ def create_modern_map(df, selected_city=None, selected_neighborhood=None, map_st
     
     # Mapear estilos
     style_map = {
-        "Normal (Ruas)": "OpenStreetMap",
+        "Normal (Ruas)": "CartoDB positron",
         "Escuro (Dark)": "CartoDB dark_matter"
     }
     
@@ -687,7 +687,7 @@ def create_modern_map(df, selected_city=None, selected_neighborhood=None, map_st
     
     # Adicionar camadas de tiles alternativas
     folium.TileLayer(
-        tiles='OpenStreetMap',
+        tiles='CartoDB positron',
         name='Normal (Ruas)',
         overlay=False,
         control=True
