@@ -112,17 +112,49 @@ st.markdown("""
     /* Containers menores e cinza claro */
     .stMetric {
         background: #f8f9fa !important;
-        border-radius: 8px !important;
-        padding: 0.5rem !important;
-        margin: 0.25rem !important;
+        border-radius: 6px !important;
+        padding: 0.25rem !important;
+        margin: 0.1rem !important;
+        min-height: auto !important;
     }
     
     .stMetric > div {
-        padding: 0.5rem !important;
+        padding: 0.25rem !important;
+        margin: 0 !important;
     }
     
     .stMetric > div > div {
-        padding: 0.25rem !important;
+        padding: 0.1rem !important;
+        margin: 0 !important;
+    }
+    
+    .stMetric > div > div > div {
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+    
+    /* Reduzir tamanho dos valores */
+    .stMetric [data-testid="metric-container"] {
+        padding: 0.2rem !important;
+        margin: 0 !important;
+    }
+    
+    .stMetric [data-testid="metric-container"] > div {
+        padding: 0.1rem !important;
+        margin: 0 !important;
+    }
+    
+    /* Forçar fundo cinza claro em todos os elementos */
+    .stMetric, .stMetric *, .stMetric > div, .stMetric > div > div {
+        background: #f8f9fa !important;
+        background-color: #f8f9fa !important;
+    }
+    
+    /* Reduzir ainda mais o tamanho */
+    .stMetric {
+        height: auto !important;
+        min-height: 60px !important;
+        max-height: 80px !important;
     }
     
     .property-title {
