@@ -609,12 +609,12 @@ Este projeto está licenciado sob a **MIT License** - veja o arquivo [LICENSE](L
 
 ### **Desenvolvedor**
 - 👤 **Ricardo Frugoni**
-- 📧 **Email**: ricardo@example.com
+- 📧 **Email**: ricardo@ricardofrugoni.com.br
 - 🐙 **GitHub**: [@ricardofrugoni](https://github.com/ricardofrugoni)
 
 ### **Suporte**
+- 📧 **Email**: suporte@ricardofrugoni.com.br
 - 🐛 **Issues**: [GitHub Issues](https://github.com/ricardofrugoni/aluguel-se-br/issues)
-- 💬 **Discussions**: [GitHub Discussions](https://github.com/ricardofrugoni/aluguel-se-br/discussions)
 - 📖 **Documentação**: [docs/](docs/)
 
 ### **Links Úteis**
