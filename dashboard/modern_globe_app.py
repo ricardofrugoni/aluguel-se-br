@@ -575,7 +575,7 @@ def load_airbnb_historical_data():
     
     return pd.DataFrame(data)
 
-def create_modern_map(df, selected_city=None, selected_neighborhood=None, map_style="CartoDB Positron", zoom_level=12, marker_size=10):
+def create_modern_map(df, selected_city=None, selected_neighborhood=None, map_style="CartoDB Positron"):
     """
     Cria mapa Folium moderno com scroll funcional e opções personalizáveis
     """
@@ -603,7 +603,7 @@ def create_modern_map(df, selected_city=None, selected_neighborhood=None, map_st
     # Criar mapa com configurações otimizadas
     m = folium.Map(
         location=[center_lat, center_lon],
-        zoom_start=zoom_level,
+        zoom_start=12,
         tiles=style_map[map_style],
         prefer_canvas=False,
         zoom_control=True,
@@ -617,70 +617,27 @@ def create_modern_map(df, selected_city=None, selected_neighborhood=None, map_st
         min_zoom=8
     )
     
-    # Adicionar camadas de tiles com estilos diferentes
-    if map_style == "OpenStreetMap":
-        folium.TileLayer(
-            tiles='OpenStreetMap',
-            name='OpenStreetMap',
-            overlay=False,
-            control=True
-        ).add_to(m)
-        
-        folium.TileLayer(
-            tiles='CartoDB positron',
-            name='CartoDB Positron',
-            overlay=False,
-            control=True
-        ).add_to(m)
-        
-        folium.TileLayer(
-            tiles='CartoDB dark_matter',
-            name='CartoDB Dark',
-            overlay=False,
-            control=True
-        ).add_to(m)
-    elif map_style == "CartoDB Dark":
-        folium.TileLayer(
-            tiles='CartoDB dark_matter',
-            name='CartoDB Dark',
-            overlay=False,
-            control=True
-        ).add_to(m)
-        
-        folium.TileLayer(
-            tiles='OpenStreetMap',
-            name='OpenStreetMap',
-            overlay=False,
-            control=True
-        ).add_to(m)
-        
-        folium.TileLayer(
-            tiles='CartoDB positron',
-            name='CartoDB Positron',
-            overlay=False,
-            control=True
-        ).add_to(m)
-    else:  # CartoDB Positron (padrão)
-        folium.TileLayer(
-            tiles='CartoDB positron',
-            name='CartoDB Positron',
-            overlay=False,
-            control=True
-        ).add_to(m)
-        
-        folium.TileLayer(
-            tiles='OpenStreetMap',
-            name='OpenStreetMap',
-            overlay=False,
-            control=True
-        ).add_to(m)
-        
-        folium.TileLayer(
-            tiles='CartoDB dark_matter',
-            name='CartoDB Dark',
-            overlay=False,
-            control=True
-        ).add_to(m)
+    # Adicionar camadas de tiles alternativas
+    folium.TileLayer(
+        tiles='OpenStreetMap',
+        name='OpenStreetMap',
+        overlay=False,
+        control=True
+    ).add_to(m)
+    
+    folium.TileLayer(
+        tiles='CartoDB positron',
+        name='CartoDB Positron',
+        overlay=False,
+        control=True
+    ).add_to(m)
+    
+    folium.TileLayer(
+        tiles='CartoDB dark_matter',
+        name='CartoDB Dark',
+        overlay=False,
+        control=True
+    ).add_to(m)
     
     # Adicionar controle de camadas
     folium.LayerControl().add_to(m)
@@ -837,19 +794,10 @@ def main():
     st.markdown("## 🗺️ Mapa Inteligente")
     
     # Opções do mapa acima do mapa
-    col1, col2, col3 = st.columns(3)
-    
-    with col1:
-        map_style = st.selectbox(
-            "🎨 Estilo do Mapa",
-            ["CartoDB Positron", "OpenStreetMap", "CartoDB Dark"]
-        )
-    
-    with col2:
-        zoom_level = st.slider("🔍 Zoom Inicial", 8, 16, 12)
-    
-    with col3:
-        marker_size = st.slider("📍 Tamanho dos Marcadores", 5, 20, 10)
+    map_style = st.selectbox(
+        "🗺️ Tipo de Mapa",
+        ["CartoDB Positron", "OpenStreetMap", "CartoDB Dark"]
+    )
     
     st.markdown("**💡 Dica**: Use o scroll do mouse para zoom. Cores indicam status do preço: 🔴 Alto, 🟡 Baixo, 🟢 Normal")
     
@@ -874,9 +822,7 @@ def main():
         filtered_df, 
         selected_city if selected_city != 'Todos' else None, 
         selected_neighborhood if selected_neighborhood != 'Todos' else None,
-        map_style,
-        zoom_level,
-        marker_size
+        map_style
     )
     
     # Exibir mapa
