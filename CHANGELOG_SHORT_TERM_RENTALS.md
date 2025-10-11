@@ -333,3 +333,5 @@ Janeiro.
 ---
 
 **Note**: These changes are specifically designed for short-term vacation rentals and may not be applicable to traditional long-term residential rentals.
+
+

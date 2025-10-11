@@ -1,0 +1,3 @@
+# Ignorar arquivos processados grandes
+*.csv
+!sample_data.csv  # Manter apenas amostra

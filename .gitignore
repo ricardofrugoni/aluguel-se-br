@@ -4,6 +4,9 @@ __pycache__/
 *$py.class
 *.so
 .Python
+env/
+venv/
+ENV/
 build/
 develop-eggs/
 dist/
@@ -19,78 +22,62 @@ wheels/
 *.egg-info/
 .installed.cfg
 *.egg
-MANIFEST
 
-# Virtual Environment
-venv/
-env/
-ENV/
-env.bak/
-venv.bak/
+# Jupyter Notebook
+.ipynb_checkpoints
+*.ipynb_checkpoints
 
-# Python cache
-__pycache__/
-*.pyc
-*.pyo
-*.pyd
-
-# IDE
+# IDEs
 .vscode/
 .idea/
 *.swp
 *.swo
 *~
 
-# Jupyter Notebook
-.ipynb_checkpoints
-
-# Data files
-data/raw/*.csv
-data/raw/*.csv.gz
-data/processed/*.pkl
-data/processed/*.json
-data/external/*.pkl
-
-# Model files
-models/*.pkl
-models/*.joblib
-models/*.h5
-
-# Logs
-*.log
-logs/
-
 # OS
 .DS_Store
 Thumbs.db
 
-# Streamlit
-.streamlit/
+# Data files - IMPORTANTE para projeto público
+data/raw/*.csv
+data/raw/*.gz
+data/raw/*.zip
+data/processed/*.csv
+!data/processed/sample_data.csv  # Manter apenas amostra
+data/external/*.csv
+!data/external/pois_sample.geojson  # Manter POIs processados
 
-# Temporary files
-*.tmp
-*.temp
-temp/
-tmp/
+# Models (arquivos grandes)
+models/*.pkl
+models/*.joblib
+models/*.h5
+!models/.gitkeep
 
-# Cache
-.cache/
-__pycache__/
+# Logs
+logs/
+*.log
+
+# Reports temporários
+reports/*.html
+!reports/figures/  # Manter imagens para README
 
 # Environment variables
 .env
 .env.local
-.env.development.local
-.env.test.local
-.env.production.local
 
-# Reports and outputs
-reports/*.html
-reports/*.png
-reports/*.jpg
-reports/*.pdf
+# Temporary files
+*.tmp
+*.bak
+*.cache
 
-# Notebook outputs
-notebooks/*.html
-notebooks/*.png
-notebooks/*.jpg
+# Coverage
+htmlcov/
+.coverage
+.coverage.*
+coverage.xml
+*.cover
+
+# MyPy
+.mypy_cache/
+.dmypy.json
+dmypy.json

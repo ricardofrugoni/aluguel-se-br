@@ -9,6 +9,10 @@
 
 **Sistema Inteligente de Análise de Preços para Aluguel por Temporada**
 
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://airbnb-price-prediction.streamlit.app)
+
+**[🌐 Live Demo - Interactive Dashboard](https://airbnb-price-prediction.streamlit.app)**
+
 [🌐 Live Demo](https://airbnb-price-intelligence.streamlit.app) | [📊 Dashboard](https://airbnb-price-intelligence.streamlit.app) | [📖 Documentação](docs/)
 
 </div>

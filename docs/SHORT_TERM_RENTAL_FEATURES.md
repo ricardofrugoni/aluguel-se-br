@@ -307,3 +307,5 @@ df = feature_engineer.create_all_features(df, pois)
 ---
 
 **Note**: These features are specifically designed for short-term vacation rentals and may not be applicable to traditional long-term residential rentals.
+
+

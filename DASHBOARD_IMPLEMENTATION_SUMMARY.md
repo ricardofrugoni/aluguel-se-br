@@ -392,3 +392,5 @@ python run_dashboard.py
 ```
 
 **🏠 Dashboard de Análise de Preços de Aluguel por Temporada - Implementação Completa!** 🚀
+
+

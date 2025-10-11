@@ -114,3 +114,5 @@ python run_folium_dashboard.py
 **✅ Status**: Dashboard funcionando com scroll do mouse
 **🔗 URL**: http://localhost:8501
 **📱 Compatibilidade**: Desktop e Mobile
+
+

@@ -176,3 +176,5 @@ git push origin main
 **✅ Status**: Pronto para deploy 24/7
 **🔗 URL**: https://airbnb-price-intelligence.streamlit.app
 **📱 Compatibilidade**: Todos os dispositivos
+
+

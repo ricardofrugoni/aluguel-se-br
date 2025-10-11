@@ -141,3 +141,5 @@ LOGGING_CONFIG = {
     'max_size': 10 * 1024 * 1024,  # 10MB
     'backup_count': 5
 }
+
+
