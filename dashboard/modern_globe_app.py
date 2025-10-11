@@ -215,7 +215,31 @@ def load_airbnb_historical_data():
         'Andaraí': {'lat': -22.9208, 'lon': -43.2204}
     }
     
-    # Coordenadas reais de bairros de SP
+    # Ruas famosas por bairro para adicionar nos cards
+    rj_streets = {
+        'Copacabana': ['Avenida Atlântica', 'Rua Barata Ribeiro', 'Rua Nossa Senhora de Copacabana'],
+        'Ipanema': ['Rua Visconde de Pirajá', 'Avenida Vieira Souto', 'Rua Farme de Amoedo'],
+        'Leblon': ['Rua Dias Ferreira', 'Avenida Ataulfo de Paiva', 'Rua General Urquiza'],
+        'Botafogo': ['Rua Voluntários da Pátria', 'Rua São Clemente', 'Avenida Pasteur'],
+        'Flamengo': ['Rua Marquês de Abrantes', 'Rua Senador Vergueiro', 'Avenida Beira Mar'],
+        'Leme': ['Avenida Atlântica', 'Rua Gustavo Sampaio', 'Rua Antônio Vieira'],
+        'Arpoador': ['Avenida Atlântica', 'Rua Francisco Otaviano', 'Rua Joana Angélica'],
+        'Urca': ['Rua Marechal Cantuária', 'Rua General Bruce', 'Avenida Pasteur'],
+        'Catete': ['Rua do Catete', 'Rua Silveira Martins', 'Avenida Beira Mar'],
+        'Gloria': ['Rua da Glória', 'Rua do Russel', 'Avenida Beira Mar'],
+        'Laranjeiras': ['Rua das Laranjeiras', 'Rua General Glicério', 'Rua Pinheiro Machado'],
+        'Cosme Velho': ['Rua Cosme Velho', 'Rua Ladeira dos Tabajaras', 'Rua das Laranjeiras'],
+        'Santa Teresa': ['Rua Almirante Alexandrino', 'Rua Joaquim Murtinho', 'Largo dos Guimarães'],
+        'Centro': ['Rua da Carioca', 'Rua Uruguaiana', 'Avenida Rio Branco'],
+        'Lapa': ['Rua da Lapa', 'Rua Joaquim Silva', 'Avenida Mem de Sá'],
+        'Tijuca': ['Rua Conde de Bonfim', 'Rua Haddock Lobo', 'Avenida Maracanã'],
+        'Vila Isabel': ['Rua Barão de Mesquita', 'Rua Maxwell', 'Rua Goulart'],
+        'Maracanã': ['Rua São Francisco Xavier', 'Rua Mariz e Barros', 'Avenida Maracanã'],
+        'Grajaú': ['Rua Barão de Mesquita', 'Rua Maxwell', 'Rua Goulart'],
+        'Andaraí': ['Rua Barão de Mesquita', 'Rua Maxwell', 'Rua Goulart']
+    }
+    
+    # Coordenadas reais de bairros de SP (corrigidas para evitar mar)
     sp_neighborhoods = {
         'Vila Madalena': {'lat': -23.5489, 'lon': -46.6320},
         'Pinheiros': {'lat': -23.5460, 'lon': -46.6294},
@@ -237,6 +261,30 @@ def load_airbnb_historical_data():
         'Sé': {'lat': -23.5450, 'lon': -46.6350},
         'Bom Retiro': {'lat': -23.5450, 'lon': -46.6350},
         'Brás': {'lat': -23.5450, 'lon': -46.6350}
+    }
+    
+    # Ruas famosas por bairro de SP para adicionar nos cards
+    sp_streets = {
+        'Vila Madalena': ['Rua Harmonia', 'Rua Aspicuelta', 'Rua Purpurina'],
+        'Pinheiros': ['Rua dos Pinheiros', 'Rua Teodoro Sampaio', 'Rua Cardeal Arcoverde'],
+        'Jardins': ['Rua Oscar Freire', 'Rua Augusta', 'Rua Haddock Lobo'],
+        'Vila Olímpia': ['Rua Funchal', 'Rua Cidade de Toledo', 'Avenida Faria Lima'],
+        'Itaim Bibi': ['Rua Bandeira Paulista', 'Rua Joaquim Floriano', 'Avenida Faria Lima'],
+        'Moema': ['Rua Moema', 'Rua Inácio Pereira da Rocha', 'Avenida Ibirapuera'],
+        'Vila Nova Conceição': ['Rua Bandeira Paulista', 'Rua Joaquim Floriano', 'Avenida Faria Lima'],
+        'Brooklin': ['Rua dos Três Irmãos', 'Rua Bandeira Paulista', 'Avenida Faria Lima'],
+        'Paraíso': ['Rua do Paraíso', 'Rua Vergueiro', 'Avenida Paulista'],
+        'Vila Mariana': ['Rua Domingos de Morais', 'Rua Vergueiro', 'Avenida Paulista'],
+        'Liberdade': ['Rua da Liberdade', 'Rua Galvão Bueno', 'Avenida Liberdade'],
+        'Bela Vista': ['Rua Augusta', 'Rua Consolação', 'Avenida Paulista'],
+        'Consolação': ['Rua da Consolação', 'Rua Augusta', 'Avenida Paulista'],
+        'Higienópolis': ['Rua da Consolação', 'Rua Augusta', 'Avenida Paulista'],
+        'Perdizes': ['Rua Cardeal Arcoverde', 'Rua dos Pinheiros', 'Rua Teodoro Sampaio'],
+        'Vila Buarque': ['Rua da Consolação', 'Rua Augusta', 'Avenida Paulista'],
+        'República': ['Rua da Consolação', 'Rua Augusta', 'Avenida Paulista'],
+        'Sé': ['Rua da Consolação', 'Rua Augusta', 'Avenida Paulista'],
+        'Bom Retiro': ['Rua da Consolação', 'Rua Augusta', 'Avenida Paulista'],
+        'Brás': ['Rua da Consolação', 'Rua Augusta', 'Avenida Paulista']
     }
     
     data = []
@@ -277,6 +325,9 @@ def load_airbnb_historical_data():
                 price_status = 'normal'
                 price_color = 'green'
             
+            # Selecionar rua aleatória do bairro
+            street = np.random.choice(rj_streets[neighborhood])
+            
             data.append({
                 'city': 'Rio de Janeiro',
                 'neighborhood': neighborhood,
@@ -297,7 +348,7 @@ def load_airbnb_historical_data():
                 'instant_bookable': np.random.choice(['t', 'f']),
                 'availability_30': np.random.randint(0, 30),
                 'amenities': '["Wifi", "Kitchen", "Air conditioning", "TV", "Hot water"]',
-                'address': f"{neighborhood}, Rio de Janeiro - RJ"
+                'address': f"{street}, {neighborhood}, Rio de Janeiro - RJ"
             })
     
     # Gerar dados históricos para SP
@@ -334,6 +385,9 @@ def load_airbnb_historical_data():
                 price_status = 'normal'
                 price_color = 'green'
             
+            # Selecionar rua aleatória do bairro
+            street = np.random.choice(sp_streets[neighborhood])
+            
             data.append({
                 'city': 'São Paulo',
                 'neighborhood': neighborhood,
@@ -354,7 +408,7 @@ def load_airbnb_historical_data():
                 'instant_bookable': np.random.choice(['t', 'f']),
                 'availability_30': np.random.randint(0, 30),
                 'amenities': '["Wifi", "Kitchen", "Air conditioning", "TV", "Hot water"]',
-                'address': f"{neighborhood}, São Paulo - SP"
+                'address': f"{street}, {neighborhood}, São Paulo - SP"
             })
     
     return pd.DataFrame(data)
@@ -421,16 +475,16 @@ def create_modern_map(df, selected_city=None, selected_neighborhood=None):
     
     # Adicionar pontos para cada propriedade
     for idx, property in df.iterrows():
-        # Determinar cor e ícone baseado no status do preço
+        # Determinar cor baseado no status do preço (sem setas)
         if property['price_status'] == 'high':
             color = 'red'
-            icon = 'arrow-up'
+            icon = 'home'
         elif property['price_status'] == 'low':
             color = 'orange'
-            icon = 'arrow-down'
+            icon = 'home'
         else:
             color = 'green'
-            icon = 'minus'
+            icon = 'home'
         
         # Criar popup moderno
         popup_html = f"""
@@ -450,6 +504,10 @@ def create_modern_map(df, selected_city=None, selected_neighborhood=None):
                 <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
                     <span style="color: #7f8c8d;">📈 Status:</span>
                     <span style="font-weight: bold; color: {'#e74c3c' if property['price_status'] == 'high' else '#27ae60' if property['price_status'] == 'normal' else '#f39c12'};">{property['price_status'].upper()}</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                    <span style="color: #7f8c8d;">📍 Endereço:</span>
+                    <span style="font-weight: bold; font-size: 0.9rem;">{property['address']}</span>
                 </div>
                 <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
                     <span style="color: #7f8c8d;">🏠 Tipo:</span>
