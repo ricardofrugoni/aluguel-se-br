@@ -133,47 +133,47 @@ st.markdown("""
         background-color: #f8f9fa !important;
     }
     
-    /* Forçar fundo cinza ESCURO - SUPER AGRESSIVO */
+    /* Forçar fundo cinza claro #a9a9a9 - SUPER AGRESSIVO */
     .stApp {
-        background: #2c3e50 !important;
-        background-color: #2c3e50 !important;
+        background: #a9a9a9 !important;
+        background-color: #a9a9a9 !important;
     }
     
     .stApp * {
-        background: #2c3e50 !important;
-        background-color: #2c3e50 !important;
+        background: #a9a9a9 !important;
+        background-color: #a9a9a9 !important;
     }
     
     .stApp > div {
-        background: #2c3e50 !important;
-        background-color: #2c3e50 !important;
+        background: #a9a9a9 !important;
+        background-color: #a9a9a9 !important;
     }
     
     .stApp > div * {
-        background: #2c3e50 !important;
-        background-color: #2c3e50 !important;
+        background: #a9a9a9 !important;
+        background-color: #a9a9a9 !important;
     }
     
     .stApp > div > div {
-        background: #2c3e50 !important;
-        background-color: #2c3e50 !important;
+        background: #a9a9a9 !important;
+        background-color: #a9a9a9 !important;
     }
     
     .stApp > div > div * {
-        background: #2c3e50 !important;
-        background-color: #2c3e50 !important;
+        background: #a9a9a9 !important;
+        background-color: #a9a9a9 !important;
     }
     
-    /* Forçar fundo cinza ESCURO no body */
+    /* Forçar fundo cinza claro no body */
     body {
-        background: #2c3e50 !important;
-        background-color: #2c3e50 !important;
+        background: #a9a9a9 !important;
+        background-color: #a9a9a9 !important;
     }
     
-    /* Forçar fundo cinza ESCURO em TODOS os elementos */
+    /* Forçar fundo cinza claro em TODOS os elementos */
     * {
-        background: #2c3e50 !important;
-        background-color: #2c3e50 !important;
+        background: #a9a9a9 !important;
+        background-color: #a9a9a9 !important;
     }
     
     /* Forçar fundo cinza em todos os elementos */
@@ -875,32 +875,32 @@ def main():
     
     st.markdown(f"""
     <div style="display: flex; gap: 8px; margin: 5px 0;">
-        <div style="background: #34495e !important; background-color: #34495e !important; padding: 8px; border-radius: 4px; flex: 1; display: flex; align-items: center; min-height: 50px; max-height: 50px;">
+        <div style="background: #ffffff !important; background-color: #ffffff !important; padding: 8px; border-radius: 4px; flex: 1; display: flex; align-items: center; min-height: 50px; max-height: 50px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
             <div style="font-size: 1.5rem; margin-right: 8px;">🏠</div>
             <div style="flex: 1;">
-                <div style="font-size: 1.2rem; font-weight: bold; color: #ffffff;">{len(filtered_df):,}</div>
-                <div style="font-size: 0.8rem; color: #bdc3c7;">Propriedades</div>
+                <div style="font-size: 1.2rem; font-weight: bold; color: #2c3e50;">{len(filtered_df):,}</div>
+                <div style="font-size: 0.8rem; color: #7f8c8d;">Propriedades</div>
             </div>
         </div>
-        <div style="background: #34495e !important; background-color: #34495e !important; padding: 8px; border-radius: 4px; flex: 1; display: flex; align-items: center; min-height: 50px; max-height: 50px;">
+        <div style="background: #ffffff !important; background-color: #ffffff !important; padding: 8px; border-radius: 4px; flex: 1; display: flex; align-items: center; min-height: 50px; max-height: 50px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
             <div style="font-size: 1.5rem; margin-right: 8px;">💰</div>
             <div style="flex: 1;">
-                <div style="font-size: 1.2rem; font-weight: bold; color: #ffffff;">R$ {avg_price:.0f}</div>
-                <div style="font-size: 0.8rem; color: #bdc3c7;">Preço Médio</div>
+                <div style="font-size: 1.2rem; font-weight: bold; color: #2c3e50;">R$ {avg_price:.0f}</div>
+                <div style="font-size: 0.8rem; color: #7f8c8d;">Preço Médio</div>
             </div>
         </div>
-        <div style="background: #34495e !important; background-color: #34495e !important; padding: 8px; border-radius: 4px; flex: 1; display: flex; align-items: center; min-height: 50px; max-height: 50px;">
+        <div style="background: #ffffff !important; background-color: #ffffff !important; padding: 8px; border-radius: 4px; flex: 1; display: flex; align-items: center; min-height: 50px; max-height: 50px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
             <div style="font-size: 1.5rem; margin-right: 8px;">📈</div>
             <div style="flex: 1;">
-                <div style="font-size: 1.2rem; font-weight: bold; color: #ffffff;">{high_price_pct:.1f}%</div>
-                <div style="font-size: 0.8rem; color: #bdc3c7;">Acima da Média</div>
+                <div style="font-size: 1.2rem; font-weight: bold; color: #2c3e50;">{high_price_pct:.1f}%</div>
+                <div style="font-size: 0.8rem; color: #7f8c8d;">Acima da Média</div>
             </div>
         </div>
-        <div style="background: #34495e !important; background-color: #34495e !important; padding: 8px; border-radius: 4px; flex: 1; display: flex; align-items: center; min-height: 50px; max-height: 50px;">
+        <div style="background: #ffffff !important; background-color: #ffffff !important; padding: 8px; border-radius: 4px; flex: 1; display: flex; align-items: center; min-height: 50px; max-height: 50px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
             <div style="font-size: 1.5rem; margin-right: 8px;">📉</div>
             <div style="flex: 1;">
-                <div style="font-size: 1.2rem; font-weight: bold; color: #ffffff;">{low_price_pct:.1f}%</div>
-                <div style="font-size: 0.8rem; color: #bdc3c7;">Abaixo da Média</div>
+                <div style="font-size: 1.2rem; font-weight: bold; color: #2c3e50;">{low_price_pct:.1f}%</div>
+                <div style="font-size: 0.8rem; color: #7f8c8d;">Abaixo da Média</div>
             </div>
         </div>
     </div>
